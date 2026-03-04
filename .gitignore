@@ -26,3 +26,5 @@ speed_*.csv
 *.exe
 *.syso
 .wiki/
+
+!Subs-Check-PRO_OG.png
