@@ -459,7 +459,7 @@
   function restoreHistoryTitle() {
     // 1. 恢复标题文字
     if (els.historyTitle) {
-      els.historyTitle.textContent = ''
+      els.historyTitle.textContent = '上次检测'
     }
 
     // 2. 隐藏订阅获取阶段的临时数据行

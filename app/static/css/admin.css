@@ -830,14 +830,76 @@ main {
 }
 
 .history-title {
-  font-weight: 600;
+  font-weight: 800;
   font-size: 14px;
   color: var(--muted);
 }
 
-.mobileBtns{
-  gap:0;
+.icon-small {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2;
+  margin-top: 4px;
 }
+
+.btn.small {
+  padding: 4px;
+  font-size: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+/* ── mobileBtns：小屏右侧操作按钮组 ── */
+.mobileBtns {
+  display: flex;
+  align-items: center;
+  gap: 2px;                  /* 按钮间距，可调大至 4px */
+  flex-shrink: 0;
+}
+
+.mobileBtns .btn.small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 24px;
+  padding: 0;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.mobileBtns .btn.small:hover {
+  color: var(--fg);
+  /* background: color-mix(in srgb, var(--fg) 6%, transparent); */
+  transform: none;           /* 覆盖 .btn:hover 的上移效果 */
+  /* box-shadow: none; */
+}
+
+#btnlogoutMobile:hover {
+  color: var(--danger);
+}
+
+.mobileBtns .btn.small .btn-icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2px;
+  color: inherit;            /* 跟随按钮颜色变化 */
+}
+
+/* Sub-Store 填充型图标微调（无描边） */
+.mobileBtns #btnSubStore svg {
+  stroke: none !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+
 .history-summary {
   display: flex;
   justify-content: space-between;
@@ -1043,24 +1105,8 @@ main {
   }
 }
 
-.btn.small {
-  padding: 2px 4px;
-  font-size: 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-}
-
 .btn-icon {
   color: var(--muted);
-}
-
-.icon-small {
-  width: 12px;
-  height: 12px;
-  stroke-width: 1;
-  padding-top: 2px;
 }
 
 .icon-md {
