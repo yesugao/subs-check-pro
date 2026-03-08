@@ -1,4 +1,4 @@
-# 📱 安卓手机运行subs-check教程
+# 📱 安卓手机运行subs-check-pro教程
 >
 > 使用Termux
 
@@ -20,10 +20,10 @@ pkg update && pkg add nodejs ca-certificates which proot termux-exec -y
 
 ## 切换环境
 >
-> 每次打开终端运行subs-check都需要切换一下
+> 每次打开终端运行subs-check-pro都需要切换一下
 
 ```bash
-# 目的是为了让subs-check有个完整的Linux环境
+# 目的是为了让subs-check-pro有个完整的Linux环境
 termux-chroot
 
 # 如遇到DNS问题，请自行更改/etc/resolv.conf
@@ -50,11 +50,11 @@ source ~/.bashrc
 ## 运行程序
 
 ```bash
-./subs-check
+./subs-check-pro
 ```
 
 ## 常见问题
 
 1. 如果遇到证书错误，确保已正确设置 `SSL_CERT_FILE`
-2. 如果提示权限不足，确保已执行 `chmod 755 subs-check`
+2. 如果提示权限不足，确保已执行 `chmod 755 subs-check-pro`
 3. 如果提示找不到 node，确保已正确设置 `NODEBIN_PATH`

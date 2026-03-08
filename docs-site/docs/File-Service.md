@@ -1,6 +1,6 @@
 # 🌐 内置文件服务
 
-subs-check 会在测试完后保存三个文件到 `output/sub` 目录中；`output/sub` 目录中的所有文件会由 8199 端口提供文件服务。
+subs-check-pro 会在测试完后保存三个文件到 `output/sub` 目录中；`output/sub` 目录中的所有文件会由 8199 端口提供文件服务。
 
 ⚠️ 为方便使用 Cloudflare 隧道映射等方案在公网访问，本项目取消了对 `output` 文件夹的无限制访问。
 
@@ -28,7 +28,7 @@ share-password: ""
 
 | 服务地址                                                   | 格式说明                      | 来源说明                      |
 | --------------------------------------------------------- | ----------------------------- | ---------------------------- |
-| `http://127.0.0.1:8199/sub/{share-password}/all.yaml`     | Clash 格式节点                 | 由 subs-check 直接生成        |
+| `http://127.0.0.1:8199/sub/{share-password}/all.yaml`     | Clash 格式节点                 | 由 subs-check-pro 直接生成        |
 | `http://127.0.0.1:8199/sub/{share-password}/mihomo.yaml`  | 带分流规则的 Mihomo/Clash 订阅  | 从上方 sub-store 转换下载后提供|
 | `http://127.0.0.1:8199/sub/{share-password}/base64.txt`   | Base64 格式订阅                | 从上方 sub-store 转换下载后提供|
 | `http://127.0.0.1:8199/sub/{share-password}/history.yaml` | Clash 格式节点                 | 历次检测可用节点               |

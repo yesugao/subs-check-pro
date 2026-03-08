@@ -66,8 +66,8 @@ func NewIPInfoClient(httpClient *http.Client, db *maxminddb.Reader, ipList, geoL
 // - 前两位字母是实际浏览网站识别的位置, -US⁰为使用CF CDN服务的网站识别的位置, 比如GPT, X等
 func GetProxyCountry(httpClient *http.Client, db *maxminddb.Reader, GetAnalyzedCtx context.Context, cfLoc string, cfIP string) (loc string, ip string, countryCodeTag string, err error) {
 	// 设置一个临时环境变量，以排除部分api因数据库更新不及时返回的 CN
-	os.Setenv("SUBS-CHECK-CALL", "true")
-	defer os.Unsetenv("SUBS-CHECK-CALL")
+	os.Setenv("SUBS-CHECK-PRO-CALL", "true")
+	defer os.Unsetenv("SUBS-CHECK-PRO-CALL")
 
 	cliMe, err := NewIPInfoClient(httpClient, db, ipAPIsMe, geoAPIsMe)
 	if err != nil || cliMe == nil {

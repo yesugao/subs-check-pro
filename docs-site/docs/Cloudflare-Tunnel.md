@@ -44,7 +44,7 @@
 
 | 🏷️ 外网访问地址                                | 💻 本地服务地址   | 💡 用途说明  |
 |-----------------------------------------------|-------------------|------------|
-| `sub.你的域名.com/*`                           | `localhost:8199`  | subs-check |
+| `sub.你的域名.com/*`                           | `localhost:8199`  | subs-check-pro |
 | `sub_store_for_subs_check.你的域名.com/*`      | `localhost:8299`  | sub-store  |
 
 ## 🎉 使用方法

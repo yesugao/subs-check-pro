@@ -12,7 +12,7 @@ import (
 )
 
 func TestGetAnalyzed(t *testing.T) {
-	// 使用 subs-check 自己的 assets 包
+	// 使用 subs-check-pro 自己的 assets 包
 	db, err := assets.OpenMaxMindDB("")
 	if err != nil {
 		t.Errorf("打开 MaxMind 数据库失败: %v", err)
@@ -28,8 +28,8 @@ func TestGetAnalyzed(t *testing.T) {
 			}
 		}()
 	}
-	// os.Setenv("SUBS-CHECK-CALL", "true")
-	// defer os.Unsetenv("SUBS-CHECK-CALL")
+	// os.Setenv("SUBS-CHECK-PRO-CALL", "true")
+	// defer os.Unsetenv("SUBS-CHECK-PRO-CALL")
 	cli, err := ipinfo.New(
 		ipinfo.WithHttpClient(&http.Client{}),
 		ipinfo.WithDBReader(db),
@@ -67,7 +67,7 @@ func TestGetAnalyzed(t *testing.T) {
 }
 
 func TestLookupGeoIPDataWithMMDB(t *testing.T) {
-	// 使用 subs-check 自己的 assets 包
+	// 使用 subs-check-pro 自己的 assets 包
 	db, err := assets.OpenMaxMindDB("")
 	if err != nil {
 		t.Errorf("打开 MaxMind 数据库失败: %v", err)

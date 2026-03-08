@@ -44,7 +44,7 @@ const config: Config = {
     colorMode: { respectPrefersColorScheme: true },
     navbar: {
       title: 'Subs-Check⁺ PRO',
-      logo: { alt: 'Subs-Check Logo', src: 'img/favicon.ico' },
+      logo: { alt: 'Subs-Check-PRO Logo', src: 'img/favicon.ico' },
       items: [
         { type: 'docSidebar', sidebarId: 'mainSidebar', position: 'left', label: '文档' },
         {

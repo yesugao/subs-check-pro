@@ -70,7 +70,7 @@ func init() {
 	// 设置为全局日志记录器
 	slog.SetDefault(logger)
 
-	// 如存在之前未结束的subs-check进程,应终结
+	// 如存在之前未结束的subs-check-pro进程,应终结
 	if runtime.GOOS == "windows" {
 		killExistProcess()
 	}
@@ -185,7 +185,7 @@ func killExistProcess() {
 			proc, err := os.FindProcess(pid)
 			if err == nil {
 				_ = proc.Kill()
-				slog.Info("旧subs-check进程已终结", "pid", pid)
+				slog.Info("旧subs-check-pro进程已终结", "pid", pid)
 			}
 		}
 	}

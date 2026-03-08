@@ -285,7 +285,7 @@ func (pc *ProxyChecker) run(proxies []map[string]any) ([]Result, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// 如果 MaxMindDBPath 为空会自动使用 subs-check 内置数据库
+	// 如果 MaxMindDBPath 为空会自动使用 subs-check-pro 内置数据库
 	geoDB, err := assets.OpenMaxMindDB(config.GlobalConfig.MaxMindDBPath)
 	if err != nil {
 		slog.Debug(fmt.Sprintf("打开 MaxMind 数据库失败: %v", err))

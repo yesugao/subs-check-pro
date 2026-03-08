@@ -19,13 +19,13 @@ webdav:
   username: "USERNAME"
   password: "PASSWORD"
   # 可选，保存到服务端的子路径（相对路径）
-  path: "/subs-check"
+  path: "/subs-check-pro"
   # 超时（秒，可选）
   timeout: 15
 ```
 
 - 常见服务：Nextcloud、坚果云、Box、某些 NAS 等。
-- 建议为 subs-check 单独创建目录，避免与其他文件混放。
+- 建议为 subs-check-pro 单独创建目录，避免与其他文件混放。
 
 ## 生成的文件
 

@@ -50,7 +50,7 @@ const sidebars: SidebarsConfig = {
       collapsible: false,
       items: [
         { type: 'doc', id: 'Features-Details', label: '✨ 新增功能与性能优化' },
-        { type: 'doc', id: 'android', label: '📱 安卓手机运行 subs-check 教程' },
+        { type: 'doc', id: 'android', label: '📱 安卓手机运行 subs-check-pro 教程' },
         { type: 'doc', id: 'Speedtest', label: '🔗 自建测速地址' },
         { type: 'link', label: '📖 仓库 README', href: 'https://github.com/sinspired/subs-check-pro' },
       ],

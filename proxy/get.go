@@ -640,7 +640,7 @@ func fetchOnce(target string, useProxy bool, timeoutSec int, ua string) ([]byte,
 
 	// 4. 处理本地请求特殊 Header
 	if isLocalRequest(req.URL) {
-		req.Header.Set("X-From-Subs-Check", "true")
+		req.Header.Set("X-From-Subs-Check-pro", "true")
 		req.Header.Set("X-API-Key", config.GlobalConfig.APIKey)
 		q := req.URL.Query()
 		q.Set("from_subs_check", "true")

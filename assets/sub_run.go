@@ -152,7 +152,7 @@ func startSubStore(ctx context.Context) error {
 	// 在函数结束前确保尝试杀掉 node
 	defer killNodeProcess(paths.nodePath)
 
-	// 如果subs-check内存问题退出，会导致node二进制损坏，启动的node变成僵尸，所以删一遍
+	// 如果subs-check-pro内存问题退出，会导致node二进制损坏，启动的node变成僵尸，所以删一遍
 	_ = os.Remove(paths.nodePath)
 	_ = os.Remove(paths.jsPath)
 	_ = os.Remove(paths.overYamlACL4SSRPath)

@@ -21,20 +21,20 @@
 - 二进制运行（Windows）：
 
 ```powershell
-./subs-check.exe -f ./config/config.yaml
+./subs-check-pro.exe -f ./config/config.yaml
 ```
 
 - 🐳 Docker（最简）：
 
 ```bash
 docker run -d \
-  --name subs-check \
+  --name subs-check-pro \
   -p 8299:8299 \
   -p 8199:8199 \
   -v ./config:/app/config \
   -v ./output:/app/output \
   --restart always \
-  ghcr.io/sinspired/subs-check:latest
+  ghcr.io/sinspired/subs-check-pro:latest
 ```
 
 - 配置示例：
