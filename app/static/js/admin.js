@@ -51,9 +51,10 @@
     successTitle: $(`#successTitle`),
     successText: $('#successText'),
     progressPercent: $('#progressPercent'),
-    subStoreBtn: document.getElementById('sub-store'),
-    subStoreBtnMobile: document.getElementById('btnSubStore'),
+    subStoreBtn: $('#sub-store'),
+    subStoreBtnMobile: $('#btnSubStore'),
     fileManagerBtn: $('#file-manager'),
+    btnFiles: $('#btnFiles'),
     projectInfoBtn: $('#project-info'),
     downloadLogsBtnSide: $('#downloadLogsBtnSide'),
     searchBtn: $('#searchBtn'),
@@ -2415,6 +2416,10 @@
     )
 
     els.fileManagerBtn?.addEventListener('click', () => {
+      window.open('/files', '_blank', 'noopener,noreferrer');
+    });
+
+    els.btnFiles?.addEventListener('click', () => {
       window.open('/files', '_blank', 'noopener,noreferrer');
     });
 

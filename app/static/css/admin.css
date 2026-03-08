@@ -1090,7 +1090,8 @@ main {
 
 #btnlogoutMobile,
 #btnShare,
-#btnSubStore {
+#btnSubStore,
+#btnFiles {
   display: none;
 }
 
@@ -1976,7 +1977,8 @@ main {
   /* 小屏显示退出和分享按钮 */
   #btnlogoutMobile,
   #btnShare,
-  #btnSubStore {
+  #btnSubStore,
+  #btnFiles {
     display: inline-block;
   }
 
