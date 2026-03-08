@@ -249,3 +249,20 @@ func (app *App) handleFileShare(basePath string, _ bool) gin.HandlerFunc {
 		serveFileNoCache(c, absPath)
 	}
 }
+
+// handleFilesIndex 渲染文件管理索引页：
+// 根据 share-password 是否配置动态控制加密分享入口的状态
+func (app *App) handleFilesIndex(c *gin.Context) {
+	type StaticFileEntry struct {
+		Route string
+		Name  string
+	}
+	entries := make([]StaticFileEntry, 0, len(publicStaticFileList))
+	for _, f := range publicStaticFileList {
+		entries = append(entries, StaticFileEntry{Route: f.Route, Name: f.File})
+	}
+	c.HTML(http.StatusOK, "files.html", gin.H{
+		"HasPassword": config.GlobalConfig.SharePassword != "",
+		"PublicFiles": entries,
+	})
+}

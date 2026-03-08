@@ -37,6 +37,16 @@ const (
 	QueryFromCheck  = "from_subs_check_pro"
 )
 
+// publicStaticFileList 公共规则文件入口，无需鉴权
+var publicStaticFileList = []struct {
+	Route string // HTTP 路由路径
+	File  string // 对应文件名
+}{
+	{"/ACL4SSR_Online_Full.yaml", "ACL4SSR_Online_Full.yaml"},
+	{"/Sinspired_Rules_CDN.yaml", "Sinspired_Rules_CDN.yaml"},
+	{"/bdg.yaml", "bdg.yaml"},
+}
+
 var (
 	initAPIKey string
 	geneAPIKey string
@@ -126,18 +136,11 @@ func (app *App) silentLoggerMiddleware() gin.HandlerFunc {
 func (app *App) registerStaticRoutes(router *gin.Engine, outputPath string) {
 	rulesDir := outputPath
 	subDir := filepath.Join(outputPath, "sub")
-	// 公共静态文件映射（无需鉴权）
-	publicFiles := map[string]string{
-		"/ACL4SSR_Online_Full.yaml":     "ACL4SSR_Online_Full.yaml",
-		"/Sinspired_Rules_CDN.yaml":     "Sinspired_Rules_CDN.yaml",
-		"/bdg.yaml":                     "bdg.yaml",
-		"/sub/ACL4SSR_Online_Full.yaml": "ACL4SSR_Online_Full.yaml",
-		"/sub/Sinspired_Rules_CDN.yaml": "Sinspired_Rules_CDN.yaml",
-		"/sub/bdg.yaml":                 "bdg.yaml",
-	}
 
-	for routePath, fileName := range publicFiles {
-		router.StaticFile(routePath, filepath.Join(rulesDir, fileName))
+	// 公共静态文件映射（无需鉴权），从包级变量读取
+	for _, f := range publicStaticFileList {
+		router.StaticFile(f.Route, filepath.Join(rulesDir, f.File))
+		router.StaticFile("/sub"+f.Route, filepath.Join(rulesDir, f.File))
 	}
 
 	// 受保护静态文件映射（需鉴权）
@@ -179,6 +182,9 @@ func (app *App) registerShareRoutes(router *gin.Engine, outputPath string) error
 		}
 	}
 	router.GET("/more/*filepath", app.handleFileShare(moreDirPath, false))
+
+	// 分享索引页：展示所有分享入口
+	router.GET("/files", app.handleFilesIndex)
 
 	return nil
 }
