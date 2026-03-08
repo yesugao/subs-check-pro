@@ -1,3 +1,4 @@
+// server.go
 package app
 
 import (
@@ -49,7 +50,9 @@ func (app *App) initHTTPServer() error {
 	router.Use(gin.Recovery())
 	router.Use(app.silentLoggerMiddleware())
 
-	// 使用 output/sub 目录保存订阅文件，避免整个 output 目录被暴露
+	// 始终加载模板（share 页面不依赖 EnableWebUI）
+	router.SetHTMLTemplate(template.Must(template.New("").ParseFS(configFS, TemplatePattern)))
+
 	saver, err := method.NewLocalSaver()
 	if err != nil {
 		return fmt.Errorf("获取http监听目录失败: %w", err)
@@ -126,7 +129,7 @@ func (app *App) registerStaticRoutes(router *gin.Engine, outputPath string) {
 	// 公共静态文件映射（无需鉴权）
 	publicFiles := map[string]string{
 		"/ACL4SSR_Online_Full.yaml":     "ACL4SSR_Online_Full.yaml",
-		"/Sinspired_Rules_CDN.yaml":   "Sinspired_Rules_CDN.yaml",
+		"/Sinspired_Rules_CDN.yaml":     "Sinspired_Rules_CDN.yaml",
 		"/bdg.yaml":                     "bdg.yaml",
 		"/sub/ACL4SSR_Online_Full.yaml": "ACL4SSR_Online_Full.yaml",
 		"/sub/Sinspired_Rules_CDN.yaml": "Sinspired_Rules_CDN.yaml",
@@ -157,31 +160,32 @@ func (app *App) registerStaticRoutes(router *gin.Engine, outputPath string) {
 // registerShareRoutes 注册分享路由
 func (app *App) registerShareRoutes(router *gin.Engine, outputPath string) error {
 	publicShareDir := outputPath
-	EncryptedShareDir := filepath.Join(outputPath, "sub")
-	// 加密分享
-	if config.GlobalConfig.SharePassword != "" {
-		slog.Info("订阅分享 已启用", "code", config.GlobalConfig.SharePassword)
-		sharePath := "/sub/" + config.GlobalConfig.SharePassword + "/*filepath"
-		router.GET(sharePath, app.handleFileShare(EncryptedShareDir, true))
-	}
+	encryptedShareDir := filepath.Join(outputPath, "sub") // 加密分享
 
-	// 公开分享
+	// 1. 加密分享路由 (/sub/...)
+	// 匹配 /sub/分享码/文件名
+	router.GET("/sub/:code/*filepath", app.handleEncryptedShare(encryptedShareDir))
+	// 匹配 /sub 或 /sub/ (处理未输入分享码的情况)
+	router.GET("/sub", app.handleEncryptedShare(encryptedShareDir))
+	router.GET("/sub/", app.handleEncryptedShare(encryptedShareDir))
+	router.GET("/share", app.handleEncryptedShare(encryptedShareDir))
+	router.GET("/share/", app.handleEncryptedShare(encryptedShareDir))
+
+	// 2. 公开分享路由 (/more/...)
 	moreDirPath := filepath.Join(publicShareDir, ShareDirName)
 	if _, err := os.Stat(moreDirPath); os.IsNotExist(err) {
 		if err := os.MkdirAll(moreDirPath, 0o755); err != nil {
 			return err
 		}
 	}
-
 	router.GET("/more/*filepath", app.handleFileShare(moreDirPath, false))
+
 	return nil
 }
 
 // registerWebUIRoutes 注册WebUI路由
 func (app *App) registerWebUIRoutes(router *gin.Engine) {
 	slog.Info("启用Web控制面板", "path", "http://ip:port/admin", "api-key", config.GlobalConfig.APIKey)
-
-	router.SetHTMLTemplate(template.Must(template.New("").ParseFS(configFS, TemplatePattern)))
 
 	staticSub, _ := fs.Sub(staticFS, "static")
 	router.StaticFS(StaticPrefix, http.FS(staticSub))
@@ -334,37 +338,36 @@ func (app *App) getLogs(c *gin.Context) {
 
 // AnalysisReportPath 返回分析报告路径
 func AnalysisReportPath() (string, error) {
-    saver, err := method.NewLocalSaver()
-    if err != nil {
-        return "", fmt.Errorf("获取http监听目录失败: %w", err)
-    }
-    return filepath.Join(saver.OutputPath, "stats", "subs-analysis.yaml"), nil
+	saver, err := method.NewLocalSaver()
+	if err != nil {
+		return "", fmt.Errorf("获取http监听目录失败: %w", err)
+	}
+	return filepath.Join(saver.OutputPath, "stats", "subs-analysis.yaml"), nil
 }
 
 // getAnalysisReport 获取分析报告
 func (app *App) getAnalysisReport(c *gin.Context) {
-    reportPath, err := AnalysisReportPath()
-    if err != nil {
-        c.JSON(http.StatusOK, gin.H{"report": ""}) // 路径错误返回空，不报错
-        return
-    }
+	reportPath, err := AnalysisReportPath()
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"report": ""}) // 路径错误返回空，不报错
+		return
+	}
 
-    // 检查文件是否存在
-    if _, err := os.Stat(reportPath); os.IsNotExist(err) {
-        c.JSON(http.StatusOK, gin.H{"report": ""}) // 文件不存在返回空
-        return
-    }
+	// 检查文件是否存在
+	if _, err := os.Stat(reportPath); os.IsNotExist(err) {
+		c.JSON(http.StatusOK, gin.H{"report": ""}) // 文件不存在返回空
+		return
+	}
 
-    data, err := os.ReadFile(reportPath)
-    if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": "读取失败"})
-        return
-    }
+	data, err := os.ReadFile(reportPath)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "读取失败"})
+		return
+	}
 
-    // 返回 JSON 对象，包含 report 字符串
-    c.JSON(http.StatusOK, gin.H{"report": string(data)})
+	// 返回 JSON 对象，包含 report 字符串
+	c.JSON(http.StatusOK, gin.H{"report": string(data)})
 }
-
 
 // getVersion 获取版本
 func (app *App) getVersion(c *gin.Context) {
