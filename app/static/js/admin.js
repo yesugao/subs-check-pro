@@ -84,11 +84,13 @@ import { initConfigForm, renderConfigForm, collectConfigForm } from './config-fo
     historyLine: $(`#history-line`),
     analysisCard: $('#analysisCard'),
     analysisSummary: $('#analysisSummary'),
-    toastContainer: document.getElementById('toastContainer') || createToastContainer(),
 
     toggleEditorModeBtn: $('#toggleEditorMode'),
-    editorWrapper: $('#editorWrapper'),
-    cfgPanelsWrap: $('#cfgPanels'),
+    cfgTabBar:           $('#cfgTabBar'),
+    cfgPanelsWrap:       $('#cfgPanels'),
+    editorWrapper:       $('#editorWrapper'),
+    toastContainer: document.getElementById('toastContainer') || createToastContainer()
+
   }
 
   // ==================== 全局状态 ====================
@@ -113,6 +115,7 @@ import { initConfigForm, renderConfigForm, collectConfigForm } from './config-fo
   let checkStartTime = null
   let codeMirrorView = null
   let editorMode = 'form'   // 'form' | 'yaml'  — 当前视图模式
+  let _rawConfigYaml = ''     // 保存最近一次加载的原始 YAML 字符串（含注释）
 
   // Sub-Store 跳转缓存
   let _cachedSubStoreConfig = null
@@ -128,6 +131,48 @@ import { initConfigForm, renderConfigForm, collectConfigForm } from './config-fo
   let lastUIState = null // 记录 UI 状态 (idle/preparing/checking)
 
   // ==================== 核心工具函数 ====================
+
+  function switchEditorMode(mode) {
+  editorMode = mode
+  const isForm = (mode === 'form')
+
+  // Tab 导航栏
+  const tabBar = document.getElementById('cfgTabBar')
+  if (tabBar) tabBar.style.display = isForm ? '' : 'none'
+
+  // 表单面板
+  const panels = document.getElementById('cfgPanels')
+  if (panels) panels.style.display = isForm ? '' : 'none'
+
+  // YAML 编辑器容器
+  const edWrap = document.getElementById('editorWrapper')
+  if (edWrap) edWrap.style.display = isForm ? 'none' : ''
+
+  // 搜索按钮：仅 YAML 模式可见
+  const srchBtn = document.getElementById('searchBtn')
+  if (srchBtn) srchBtn.style.display = isForm ? 'none' : ''
+
+  // 切换按钮视觉高亮
+  const toggleBtn = document.getElementById('toggleEditorMode')
+  if (toggleBtn) {
+    toggleBtn.title = isForm ? '切换到 YAML 编辑器' : '切换到表单界面'
+    if (isForm) {
+      toggleBtn.style.color = ''
+      toggleBtn.style.background = ''
+    } else {
+      toggleBtn.style.color = 'var(--accent)'
+      toggleBtn.style.background = 'color-mix(in srgb, var(--accent) 10%, transparent)'
+    }
+  }
+
+  // 切入 YAML 模式：用原始 YAML 字符串填充编辑器（保留注释）
+  if (!isForm) {
+    if (_rawConfigYaml) {
+      codeMirrorView ? setEditorContent(_rawConfigYaml) : initCodeMirror(_rawConfigYaml)
+      if (codeMirrorView?.scrollDOM) codeMirrorView.scrollDOM.scrollTop = 0
+    }
+  }
+}
 
   /**
    * 创建并返回 Toast 容器
@@ -2180,77 +2225,97 @@ import { initConfigForm, renderConfigForm, collectConfigForm } from './config-fo
   }
 
   async function loadConfigValidated() {
-    if (!sessionKey) return
-    const r = await sfetch(API.config)
-    if (!r.ok) return showToast('读取配置失败', 'warn')
-    const raw =
-      typeof r.payload?.content === 'string'
-        ? r.payload.content
-        : String(r.payload || '')
+  if (!sessionKey) return
+  const r = await sfetch(API.config)
+  if (!r.ok) return showToast('读取配置失败', 'warn')
 
-    // ① 同步到 CodeMirror（初始化或更新，原逻辑不变）
+  const raw =
+    typeof r.payload?.content === 'string'
+      ? r.payload.content
+      : String(r.payload || '')
+
+  // ① 保存原始串（含注释），供 YAML 模式和保存时使用
+  _rawConfigYaml = raw
+
+  // ② 如果当前在 YAML 模式，更新编辑器
+  if (editorMode === 'yaml') {
     codeMirrorView ? setEditorContent(raw) : initCodeMirror(raw)
-    if (codeMirrorView?.scrollDOM) {
-      codeMirrorView.scrollDOM.scrollTop = 0
-    }
-
-    // ② 新增：同步渲染表单（YAML 解析后交给 config-form.js）
-    try {
-      const parsed = window.YAML.parse(raw)
-      renderConfigForm(parsed)
-    } catch (e) {
-      console.warn('表单渲染失败，YAML 解析错误:', e)
-    }
+    if (codeMirrorView?.scrollDOM) codeMirrorView.scrollDOM.scrollTop = 0
   }
+
+  // ③ 渲染表单（parse 得到 JS 对象，仅用于表单填值）
+  try {
+    const parsed = window.YAML.parse(raw)
+    renderConfigForm(parsed)
+  } catch (e) {
+    console.warn('表单渲染失败，YAML 解析错误:', e)
+  }
+}
 
   async function saveConfigWithValidation() {
-    if (!sessionKey) return
+  if (!sessionKey) return
 
-    let rawContent
+  let formatted
 
+  try {
     if (editorMode === 'form') {
-      // 表单模式：从 config-form.js 收集值，序列化为 YAML
-      try {
-        const formData = collectConfigForm()
-        // 用 YAML.parseDocument 先序列化，保留注释结构（降级方案：直接 dump）
-        rawContent = window.YAML.dump(formData, { lineWidth: 0 })
-      } catch (e) {
-        return showToast('表单序列化失败：' + e.message, 'error', 5000)
-      }
-    } else {
-      // YAML 编辑器模式：原逻辑
-      if (!codeMirrorView) return
-      rawContent = codeMirrorView.state.doc.toString()
-    }
+      // ── 表单模式 ──────────────────────────────────────
+      // 以原始 YAML（含注释）为基础，把表单的新值写入 Document
+      const base = _rawConfigYaml || ''
+      const doc  = window.YAML.parseDocument(base)
 
-    try {
+      if (doc.errors?.length) {
+        return showToast('原始配置 YAML 解析错误：' + doc.errors[0].message, 'error', 5000)
+      }
+
+      const formData = collectConfigForm()
+
+      // 遍历表单收集的所有 key，更新 Document 中对应的节点
+      // 使用 doc.set 保留同级注释；嵌套 key 按需展开
+      for (const [key, value] of Object.entries(formData)) {
+        // yaml 库 Document.set(key, value) 会保留该 key 原有的行注释
+        doc.set(key, value)
+      }
+
+      formatted = doc.toString({ lineWidth: 0 })
+
+      // 同步更新 _rawConfigYaml，下次保存/切换 YAML 模式可用
+      _rawConfigYaml = formatted
+
+    } else {
+      // ── YAML 编辑器模式 ───────────────────────────────
+      if (!codeMirrorView) return
+      const rawContent = codeMirrorView.state.doc.toString()
       const doc = window.YAML.parseDocument(rawContent)
-      if (doc.errors && doc.errors.length > 0) {
+
+      if (doc.errors?.length) {
         return showToast('YAML 语法错误：' + doc.errors[0].message, 'error', 5000)
       }
-      const formatted = doc.toString({ lineWidth: 0 })
 
-      // 若当前是 YAML 模式，顺手更新编辑器显示
-      if (editorMode === 'yaml' && codeMirrorView) {
-        setEditorContent(formatted)
-      }
-
-      const r = await sfetch(API.config, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: formatted })
-      })
-      if (r.ok) {
-        showToast(r.payload?.message || '保存成功', 'success')
-        _cachedSubStoreConfig = null
-        cachedConfigPayload = null
-      } else {
-        showToast('保存失败: ' + (r.payload?.error || '未知错误'), 'error')
-      }
-    } catch (e) {
-      showToast('校验失败：' + e.message, 'error')
+      formatted = doc.toString({ lineWidth: 0 })
+      setEditorContent(formatted)
+      _rawConfigYaml = formatted
     }
+
+  } catch (e) {
+    return showToast('校验失败：' + e.message, 'error')
   }
+
+  // 发送到后端
+  const r = await sfetch(API.config, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: formatted })
+  })
+
+  if (r.ok) {
+    showToast(r.payload?.message || '保存成功', 'success')
+    _cachedSubStoreConfig = null
+    cachedConfigPayload   = null
+  } else {
+    showToast('保存失败: ' + (r.payload?.error || '未知错误'), 'error')
+  }
+}
 
   // ==================== 其他辅助 ====================
 
@@ -2490,32 +2555,11 @@ import { initConfigForm, renderConfigForm, collectConfigForm } from './config-fo
       showToast('已开始下载日志', 'success')
     })
 
-    function switchEditorMode(mode) {
-      editorMode = mode
-      const isForm = mode === 'form'
-      const panelsWrap = $('#cfgPanels')          // .cfg-panels-wrap
-      const editorWrap = $('#editorWrapper')      // .editor-wrapper
-      const searchBtnEl = els.searchBtn
-      const toggleBtn = $('#toggleEditorMode')
-
-      if (panelsWrap) panelsWrap.style.display = isForm ? '' : 'none'
-      if (editorWrap) editorWrap.style.display = isForm ? 'none' : ''
-
-      // 搜索按钮只在 YAML 模式有意义
-      if (searchBtnEl) searchBtnEl.style.display = isForm ? 'none' : ''
-
-      if (toggleBtn) {
-        toggleBtn.title = isForm ? '切换到 YAML 编辑器' : '切换到表单界面'
-        // 激活态高亮：YAML 模式时按钮高亮
-        toggleBtn.style.color = isForm ? '' : 'var(--accent)'
-      }
-    }
-
-    // 切换按钮点击事件（追加到 bindControls 内）：
-    $('#toggleEditorMode')?.addEventListener('click', () => {
+    // 视图切换按钮
+  document.getElementById('toggleEditorMode')
+    ?.addEventListener('click', () => {
       switchEditorMode(editorMode === 'form' ? 'yaml' : 'form')
     })
-
     const logoutHandler = () => {
       if (confirm('确定退出？')) doLogout()
     }
@@ -2813,13 +2857,14 @@ import { initConfigForm, renderConfigForm, collectConfigForm } from './config-fo
       setAuthUI(false)
     }
 
-    // 页面加载后调用一次（DOMContentLoaded 或 init 函数里）
-    initConfigForm()
-    switchEditorMode('form')   // 默认表单模式
+
 
     window.addEventListener('beforeunload', () => {
       stopPollers()
       if (codeMirrorView) codeMirrorView.destroy()
     })
+    // 页面加载后调用一次（DOMContentLoaded 或 init 函数里）
+    initConfigForm()
+    switchEditorMode('form')   // 确保初始状态正确（搜索按钮隐藏等）
   })()
 })()
