@@ -19,304 +19,121 @@
         overflow-x: hidden;
     }
 
-    /* ════════════════════════════════════════
-       登录场景
-    ════════════════════════════════════════ */
+    /* login scene */
     .login-scene {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 24px 16px;
-        min-height: 100vh;
-        gap: 16px;
+        flex: 1; display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 24px 16px; min-height: 100vh; gap: 16px;
     }
-
     .login-card {
-        width: 100%;
-        max-width: 400px;
-        border-radius: 16px;
-        padding: 42px 28px 12px;
-        box-shadow: var(--glass-shadow);
-        animation: fadeUp 0.3s ease-out;
-        overflow: hidden;
+        width: 100%; max-width: 400px; border-radius: 16px;
+        padding: 42px 28px 12px; box-shadow: var(--glass-shadow);
+        animation: fadeUp 0.3s ease-out; overflow: hidden;
     }
-
-    /* 登录卡片内容区（footer以上） */
-    .login-card-body {
-        padding-bottom: 24px;
-    }
-
-    /* 登录底部版权栏：独立于卡片内容，贴底，窄边距 */
+    .login-card-body { padding-bottom: 24px; }
     .login-card-footer {
-        border-top: 1px solid var(--border);
-        padding: 10px 0px;
-        width:100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        border-top: 1px solid var(--border); padding: 10px 0;
+        width:100%; display: flex; justify-content: space-between; align-items: center;
     }
-
-    .brand-info {
-        display: flex; align-items: center; gap: 7px;
-        font-size: 12px; font-weight: 700; color: var(--muted);
-    }
+    .brand-info { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: var(--muted); }
     .brand-info img { width: 14px; height: 14px; }
     .footer-meta { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .login-bottom { margin-top:20px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
 
-    .login-bottom {
-        margin-top:20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
+    /* report scene */
+    .report-scene { display: none; flex-direction: column; height: 100vh; overflow: hidden; }
 
-    /* ════════════════════════════════════════
-       报告场景
-    ════════════════════════════════════════ */
-    .report-scene {
-        display: none;
-        flex-direction: column;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    /* 顶部导航栏 */
     .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 52px;
-        padding: 0 16px 0 20px;
-        border-bottom: 1px solid var(--border);
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        flex-shrink: 0;
-        z-index: 100;
+        display: flex; align-items: center; justify-content: space-between;
+        height: 52px; padding: 0 16px 0 20px;
+        border-bottom: 1px solid var(--border); background: var(--glass-bg);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        flex-shrink: 0; z-index: 100;
     }
-
-    .topbar-brand {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--muted);
-    }
+    .topbar-brand { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--muted); }
     .topbar-brand img { width: 16px; height: 16px; }
-
-    .topbar-meta {
-        flex: 1;
-        text-align: center;
-        font-size: 10px;
-        color: var(--muted);
-        letter-spacing: 0.04em;
-        padding: 0 12px;
-    }
-
-    .topbar-actions {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
+    .topbar-meta { flex: 1; text-align: center; font-size: 10px; color: var(--muted); letter-spacing: 0.04em; padding: 0 12px; }
+    .topbar-actions { display: flex; align-items: center; gap: 6px; }
     .topbar-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 5px 10px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        background: transparent;
-        color: var(--muted);
-        font-size: 11px;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        transition: color 0.15s, border-color 0.15s, background 0.15s;
-        white-space: nowrap;
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 5px 10px; border-radius: 8px; border: 1px solid var(--border);
+        background: transparent; color: var(--muted);
+        font-size: 11px; font-weight: 600; font-family: inherit;
+        cursor: pointer; transition: color .15s, border-color .15s, background .15s; white-space: nowrap;
     }
     .topbar-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
-    .topbar-btn:hover {
-        color: var(--fg);
-        border-color: var(--fg);
-        background: color-mix(in srgb, var(--fg) 6%, transparent);
-    }
-    .topbar-btn.danger:hover {
-        color: var(--danger);
-        border-color: var(--danger);
-        background: color-mix(in srgb, var(--danger) 8%, transparent);
-    }
+    .topbar-btn:hover { color: var(--fg); border-color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, transparent); }
+    .topbar-btn.danger:hover { color: var(--danger); border-color: var(--danger); background: color-mix(in srgb, var(--danger) 8%, transparent); }
 
-    /* ── 主体区域 ── */
-    .body-area {
-        display: flex;
-        flex: 1;
-        overflow: hidden;
-    }
+    .body-area { display: flex; flex: 1; overflow: hidden; }
 
-    /* ════════════════════════════════════════
-       侧边栏（大屏）
-    ════════════════════════════════════════ */
+    /* sidebar */
     .sidebar {
-        width: 180px;
-        flex-shrink: 0;
-        border-right: 1px solid var(--border);
-        background: var(--glass-bg);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        gap: 2px;
-        padding: 12px 8px;
-        overflow-y: auto;
-        scrollbar-width: none;
+        width: 180px; flex-shrink: 0;
+        border-right: 1px solid var(--border); background: var(--glass-bg);
+        display: flex; flex-direction: column; justify-content: flex-start;
+        gap: 2px; padding: 12px 8px; overflow-y: auto; scrollbar-width: none;
     }
     .sidebar::-webkit-scrollbar { display: none; }
-
-    .sidebar-label {
-        font-size: 9px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--muted);
-        padding: 4px 8px 8px;
-        opacity: 0.6;
-    }
-
+    .sidebar-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 4px 8px 8px; opacity: .6; }
     .sidebar-btn {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 9px 10px;
-        border-radius: 8px;
-        border: none;
-        background: transparent;
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        transition: color 0.15s, background 0.15s;
-        text-align: left;
-        width: 100%;
+        display: flex; align-items: center; gap: 10px;
+        padding: 9px 10px; border-radius: 8px; border: none;
+        background: transparent; color: var(--muted);
+        font-size: 12px; font-weight: 600; font-family: inherit;
+        cursor: pointer; transition: color .15s, background .15s; text-align: left; width: 100%;
     }
     .sidebar-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
-    .sidebar-btn .s-badge {
-        margin-left: auto;
-        font-size: 9px;
-        font-weight: 700;
-        padding: 1px 5px;
-        border-radius: 99px;
-        background: var(--border);
-        color: var(--muted);
-        flex-shrink: 0;
-    }
-    .sidebar-btn:hover {
-        color: var(--fg);
-        background: color-mix(in srgb, var(--fg) 6%, transparent);
-    }
-    .sidebar-btn.active {
-        color: var(--accent);
-        background: color-mix(in srgb, var(--accent) 10%, transparent);
-    }
-    .sidebar-btn.active .s-badge {
-        background: color-mix(in srgb, var(--accent) 20%, transparent);
-        color: var(--accent);
-    }
+    .sidebar-btn .s-badge { margin-left: auto; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 99px; background: var(--border); color: var(--muted); flex-shrink: 0; }
+    .sidebar-btn:hover { color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, transparent); }
+    .sidebar-btn.active { color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+    .sidebar-btn.active .s-badge { background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent); }
+    .sidebar-divider { display: block; height: 0; border-top: 1px solid var(--border); margin: 4px; flex-shrink: 0; align-self: stretch; }
 
-    .sidebar-divider {
-        display: block;
-        height: 0;
-        border-top: 1px solid var(--border);
-        margin: 4px 4px;
-        flex-shrink: 0;
-        align-self: stretch;
-    }
-
-    /* ════════════════════════════════════════
-       顶部 Tab 栏（小屏）
-    ════════════════════════════════════════ */
+    /* tab bar (small screen) */
     .tab-bar {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        gap: 2px;
-        padding: 0 12px;
-        height: 44px;
-        border-bottom: 1px solid var(--border);
-        background: var(--glass-bg);
-        overflow-x: auto;
-        scrollbar-width: none;
-        flex-shrink: 0;
+        display: none; align-items: center; justify-content: center;
+        gap: 2px; padding: 0 12px; height: 44px;
+        border-bottom: 1px solid var(--border); background: var(--glass-bg);
+        overflow-x: auto; scrollbar-width: none; flex-shrink: 0;
     }
     .tab-bar::-webkit-scrollbar { display: none; }
-
     .tab-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 12px;
-        border-radius: 8px;
-        border: none;
-        background: transparent;
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        white-space: nowrap;
-        transition: color 0.15s, background 0.15s;
-        flex-shrink: 0;
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 6px 12px; border-radius: 8px; border: none;
+        background: transparent; color: var(--muted);
+        font-size: 12px; font-weight: 600; font-family: inherit;
+        cursor: pointer; white-space: nowrap;
+        transition: color .15s, background .15s; flex-shrink: 0;
     }
     .tab-btn svg { width: 13px; height: 13px; }
     .tab-btn:hover { color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, transparent); }
-    .tab-btn.active {
-        color: var(--accent);
-        background: color-mix(in srgb, var(--accent) 10%, transparent);
-    }
+    .tab-btn.active { color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 
-    /* ════════════════════════════════════════
-       内容区
-    ════════════════════════════════════════ */
-    .content-area {
-        flex: 1;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-    }
-
-    .tab-content {
-        display: none;
-        flex: 1;
-        overflow-y: auto;
-        padding: 20px 24px;
-    }
+    /* content area */
+    .content-area { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+    .tab-content { display: none; flex: 1; overflow-y: auto; padding: 20px 24px; }
     .tab-content.active { display: block; }
+    .tab-inner { max-width: 1100px; margin: 0 auto; }
 
-    .tab-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-
-    /* ════════════════════════════════════════
-       响应式断点
-    ════════════════════════════════════════ */
+    /* responsive */
     @media (max-width: 720px) {
         .sidebar      { display: none; }
         .tab-bar      { display: flex; }
         .topbar-meta  { display: none; }
         .tab-btn span { display: none; }
         .tab-content  { padding: 12px; }
-        .info-chips   { grid-template-columns: repeat(2, 1fr); }
         .geo-split    { grid-template-columns: 1fr; }
         .geo-col + .geo-col { border-left: none; border-top: 1px solid var(--border); }
         .overview-grid      { grid-template-columns: 1fr !important; }
         .summary-chips-grid { grid-template-columns: repeat(2, 1fr) !important; }
         .proto-grid   { grid-template-columns: 1fr !important; }
+        .cfg-analysis-grid  { grid-template-columns: 1fr !important; }
+        /* 复制按钮小屏：只留图标 */
+        .copy-btn .btn-text { display: none; }
+        .copy-btn { padding: 6px 8px; }
+        /* 极窄屏隐藏 checkbox 文字 */
+        .scope-text { display: none; }
     }
     @media (min-width: 721px) and (max-width: 1100px) {
         .overview-grid { grid-template-columns: 1fr 1fr; }
@@ -328,127 +145,38 @@
         .summary-chips-grid { grid-template-columns: repeat(4, 1fr); }
     }
 
-    /* ════════════════════════════════════════
-       通用组件
-    ════════════════════════════════════════ */
+    /* common */
     .status-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 3px 10px;
-        border-radius: 99px;
-        font-size: 9px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        margin-bottom: 20px;
-        border: 1px solid var(--border);
-        color: var(--idle);
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 3px 10px; border-radius: 99px;
+        font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+        margin-bottom: 20px; border: 1px solid var(--border); color: var(--idle);
     }
-
-    h1 {
-        font-size: 15px;
-        font-weight: 600;
-        margin: 0 0 6px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--muted);
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-    }
+    h1 { font-size: 15px; font-weight: 600; margin: 0 0 6px; display: flex; align-items: center; gap: 8px; color: var(--muted); letter-spacing: .02em; text-transform: uppercase; }
     h1 svg { width: 16px; height: 16px; flex-shrink: 0; }
-
     .desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 18px; }
 
-    .section-title {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--muted);
-        margin: 0 0 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
+    .section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
     .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-    .section-title-toggle {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--muted);
-        margin: 0 0 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
-        -webkit-user-select: none;
-        user-select: none;
-    }
+    .section-title-toggle { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; display: flex; align-items: center; gap: 8px; cursor: pointer; -webkit-user-select: none; user-select: none; }
     .toggle-line    { flex: 1; height: 1px; background: var(--border); }
-    .toggle-chevron { width: 11px; height: 11px; flex-shrink: 0; transition: transform 0.2s; }
+    .toggle-chevron { width: 11px; height: 11px; flex-shrink: 0; transition: transform .2s; }
     .toggle-chevron.open { transform: rotate(180deg); }
 
-    /* 登录表单 */
     .auth-area  { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
-
-    .auth-input {
-        width: 100%;
-        padding: 11px 14px;
-        border: 1.5px solid var(--border);
-        border-radius: 10px;
-        background: var(--input-bg);
-        color: var(--fg);
-        font-size: 14px;
-        outline: none;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        font-family: inherit;
-    }
-    .auth-input:focus {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
-    }
-    .auth-input.error {
-        border-color: var(--danger);
-        box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 12%, transparent);
-    }
+    .auth-input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 10px; background: var(--input-bg); color: var(--fg); font-size: 14px; outline: none; transition: border-color .2s, box-shadow .2s; font-family: inherit; }
+    .auth-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent); }
+    .auth-input.error { border-color: var(--danger); box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 12%, transparent); }
     .auth-hint { font-size: 12px; color: var(--danger); min-height: 16px; margin: 0; }
-
-    .btn-auth {
-        width: 100%;
-        padding: 11px 14px;
-        border-radius: 10px;
-        border: none;
-        background: var(--accent);
-        color: #fff;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-        font-family: inherit;
-        transition: opacity 0.18s, transform 0.12s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        margin-top: 4px;
-    }
-    .btn-auth:hover   { opacity: 0.88; transform: translateY(-1px); }
-    .btn-auth:active  { opacity: 0.95; transform: translateY(0); }
-    .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-auth { width: 100%; padding: 11px 14px; border-radius: 10px; border: none; background: var(--accent); color: #fff; cursor: pointer; font-size: 14px; font-weight: 600; font-family: inherit; transition: opacity .18s, transform .12s; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px; }
+    .btn-auth:hover   { opacity: .88; transform: translateY(-1px); }
+    .btn-auth:active  { opacity: .95; transform: translateY(0); }
+    .btn-auth:disabled { opacity: .6; cursor: not-allowed; transform: none; }
     .btn-auth svg     { width: 15px; height: 15px; flex-shrink: 0; }
-
     .retry-area { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
     .retry-msg  { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.6; }
 
-    /* ════════════════════════════════════════
-       Tab 1：概览 - 摘要重设计
-       用结构化卡片代替文字段落
-    ════════════════════════════════════════ */
-
-    /* 一句话核心摘要 */
+    /* === Tab 1: overview === */
     .hero-summary {
         padding: 14px 18px;
         background: color-mix(in srgb, var(--accent) 6%, transparent);
@@ -456,708 +184,320 @@
         border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
         border-left: 3px solid var(--accent);
         margin-bottom: 16px;
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
+        display: flex; align-items: flex-start; gap: 10px;
     }
     .hero-summary svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
-    .hero-summary-text {
-        font-size: 13px;
-        color: var(--fg);
-        line-height: 1.7;
-        flex: 1;
-    }
-    .hero-summary-text .hl { font-weight: 700; color: var(--accent); }
-    .hero-summary-text .hl-ok { font-weight: 700; color: var(--success); }
+    .hero-summary-text { font-size: 13px; color: var(--fg); line-height: 1.7; flex: 1; }
+    .hero-summary-text .hl      { font-weight: 700; color: var(--accent); }
+    .hero-summary-text .hl-ok   { font-weight: 700; color: var(--success); }
     .hero-summary-text .hl-warn { font-weight: 700; color: var(--warning); }
 
-    /* 摘要芯片网格 */
-    .summary-chips-grid {
-        display: grid;
-        gap: 10px;
-        margin-bottom: 16px;
-    }
+    /* ── 摘要芯片：紧凑化 ── */
+    .summary-chips-grid { display: grid; gap: 8px; margin-bottom: 14px; }
 
     .summary-chip {
-        padding: 14px 16px;
+        padding: 10px 12px;            /* 原 14px 16px，缩减消除空旷感 */
         border-radius: 10px;
         border: 1px solid var(--border);
         background: var(--glass-bg);
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        position: relative;
-        overflow: hidden;
-        transition: border-color 0.15s, background 0.15s;
+        display: flex; flex-direction: column; gap: 2px;
+        position: relative; overflow: hidden;
+        transition: border-color .15s, background .15s;
     }
     .summary-chip:hover {
         border-color: color-mix(in srgb, var(--accent) 30%, transparent);
         background: color-mix(in srgb, var(--accent) 4%, transparent);
     }
     .chip-icon {
-        width: 28px; height: 28px;
-        border-radius: 7px;
+        width: 22px; height: 22px;     /* 原 28px，缩小 */
+        border-radius: 6px;
         display: flex; align-items: center; justify-content: center;
-        margin-bottom: 4px;
-        flex-shrink: 0;
+        margin-bottom: 4px; flex-shrink: 0;
     }
-    .chip-icon svg { width: 14px; height: 14px; }
-    .chip-value {
-        font-size: 22px;
-        font-weight: 800;
-        line-height: 1;
-        letter-spacing: -0.02em;
-    }
-    .chip-label {
-        font-size: 10px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: var(--muted);
-    }
-    .chip-sub {
-        font-size: 10px;
-        color: var(--muted);
-        opacity: 0.7;
-        margin-top: 2px;
-    }
+    .chip-icon svg { width: 12px; height: 12px; }
+    .chip-value { font-size: 19px; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+    .chip-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    .chip-sub   { font-size: 10px; color: var(--muted); opacity: .7; margin-top: 1px; }
 
-    /* 媒体/AI 解锁行 */
-    .unlock-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
-    .unlock-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 4px 10px;
-        border-radius: 99px;
-        font-size: 11px;
-        font-weight: 600;
-        border: 1px solid var(--border);
-        background: var(--glass-bg);
-    }
-    .unlock-tag .ut-dot {
-        width: 5px; height: 5px;
-        border-radius: 50%;
-        flex-shrink: 0;
-    }
-    .unlock-tag .ut-count {
-        color: var(--muted);
-        font-size: 10px;
-    }
+    .unlock-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .unlock-tag { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 600; border: 1px solid var(--border); background: var(--glass-bg); }
+    .unlock-tag .ut-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .unlock-tag .ut-count { color: var(--muted); font-size: 10px; }
 
-    /* ── 线路质量 ── */
-    .info-chips {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin-bottom: 16px;
-    }
-    .info-chip {
-        padding: 14px 10px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        background: var(--glass-bg);
-        text-align: center;
-    }
-    .info-chip .chip-value { font-size: 18px; font-weight: 700; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .info-chip .chip-label { font-size: 10px; color: var(--muted); margin-top: 4px; }
-    .info-chip.chip-accent .chip-value { color: var(--accent); }
-
-    /* 概览双列 */
-    .overview-grid {
-        display: grid;
-        gap: 12px;
-    }
-
-    .stat-panel {
-        padding: 16px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        background: var(--glass-bg);
-    }
-    .panel-title {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.07em;
-        color: var(--muted);
-        margin-bottom: 12px;
-    }
-
+    .overview-grid { display: grid; gap: 12px; }
+    .stat-panel { padding: 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--glass-bg); }
+    .panel-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 12px; }
     .quality-row { display: flex; gap: 10px; margin-bottom: 12px; }
-    .quality-item {
-        flex: 1; text-align: center; padding: 12px 4px;
-        border-radius: 8px; background: var(--input-bg); border: 1px solid var(--border);
-    }
+    .quality-item { flex: 1; text-align: center; padding: 10px 4px; border-radius: 8px; background: var(--input-bg); border: 1px solid var(--border); }
     .quality-val   { font-size: 20px; font-weight: 700; }
     .quality-label { font-size: 10px; color: var(--muted); margin-top: 4px; }
-
     .cf-breakdown { display: flex; flex-direction: column; gap: 5px; }
     .cf-group { display: flex; align-items: flex-start; gap: 6px; }
     .cf-group-title { flex-shrink: 0; width: 68px; font-weight: 600; padding-top: 2px; font-size: 10px; }
     .cf-tags  { display: flex; flex-wrap: wrap; gap: 3px; }
-    .cf-tag   {
-        display: inline-flex; align-items: center; gap: 2px;
-        padding: 1px 6px; border-radius: 99px;
-        border: 1px solid var(--border); font-size: 10px; background: var(--glass-bg);
-    }
+    .cf-tag   { display: inline-flex; align-items: center; gap: 2px; padding: 1px 6px; border-radius: 99px; border: 1px solid var(--border); font-size: 10px; background: var(--glass-bg); }
     .cf-tag em { font-style: normal; color: var(--muted); }
-
-    /* 快速导航 */
-    .nav-card {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 12px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        background: var(--input-bg);
-        cursor: pointer;
-        font-family: inherit;
-        color: var(--fg);
-        transition: border-color 0.15s, background 0.15s;
-        text-align: left;
-        width: 100%;
-        margin-bottom: 6px;
-    }
+    .nav-card { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--input-bg); cursor: pointer; font-family: inherit; color: var(--fg); transition: border-color .15s, background .15s; text-align: left; width: 100%; margin-bottom: 6px; }
     .nav-card:last-child { margin-bottom: 0; }
-    .nav-card:hover {
-        border-color: var(--accent);
-        background: color-mix(in srgb, var(--accent) 6%, transparent);
-    }
-    .nav-card-left  { display: flex; align-items: center; gap: 8px; }
+    .nav-card:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+    .nav-card-left { display: flex; align-items: center; gap: 8px; }
     .nav-card-left svg { width: 13px; height: 13px; color: var(--muted); flex-shrink: 0; }
     .nav-card-label { font-size: 13px; font-weight: 600; }
-    .nav-card-right {
-        font-size: 11px; color: var(--muted);
-        display: flex; align-items: center; gap: 4px;
-    }
-    .nav-card-right svg { width: 11px; height: 11px; opacity: 0.5; }
+    .nav-card-right { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+    .nav-card-right svg { width: 11px; height: 11px; opacity: .5; }
 
-    /* ════════════════════════════════════════
-       Tab 2：地理分布
-    ════════════════════════════════════════ */
-    .geo-view {
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: var(--glass-bg);
-        overflow: hidden;
-        margin-bottom: 4px;
-    }
-
-    /* 地图插槽：aspect-ratio 保持比例，填满宽度 */
-    .map-slot {
-        width: 100%;
-        aspect-ratio: 16 / 7;
-        min-height: 160px;
-        max-height: 360px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--input-bg);
-        border-bottom: 1px dashed color-mix(in srgb, var(--border) 80%, transparent);
-        position: relative;
-        overflow: hidden;
-        display: none; /* 默认隐藏，等待 JS 加载地图后显示 */
-    }
-    .map-slot-hint {
-        text-align: center;
-        opacity: 0.35;
-    }
+    /* === Tab 2: geo === */
+    .geo-view { border-radius: 12px; border: 1px solid var(--border); background: var(--glass-bg); overflow: hidden; margin-bottom: 4px; }
+    .map-slot { width: 100%; aspect-ratio: 16/7; min-height: 160px; max-height: 360px; display: none; align-items: center; justify-content: center; background: var(--input-bg); border-bottom: 1px dashed color-mix(in srgb, var(--border) 80%, transparent); }
+    .map-slot-hint { text-align: center; opacity: .35; }
     .map-slot-hint svg { width: 28px; height: 28px; margin: 0 auto 6px; display: block; }
     .map-slot-hint span { font-size: 11px; color: var(--muted); }
-
     .geo-split { display: grid; grid-template-columns: 1fr 1fr; }
     .geo-col   { padding: 14px 16px; }
     .geo-col + .geo-col { border-left: 1px solid var(--border); }
-
     .geo-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
     .geo-key { font-size: 11px; font-weight: 600; width: 28px; flex-shrink: 0; color: var(--fg); }
     .geo-bar-wrap { flex: 1; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
-    .geo-bar { height: 100%; background: var(--accent); border-radius: 99px; transition: width 0.5s ease; }
+    .geo-bar { height: 100%; background: var(--accent); border-radius: 99px; transition: width .5s ease; }
     .geo-val { font-size: 11px; color: var(--muted); width: 22px; text-align: right; flex-shrink: 0; }
 
-    /* ════════════════════════════════════════
-       Tab 3：协议分析（增强版）
-    ════════════════════════════════════════ */
-    .proto-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        margin-bottom: 16px;
-    }
+    /* === Tab 3: proto === */
+    .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .proto-card { padding: 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--glass-bg); display: flex; flex-direction: column; gap: 8px; transition: border-color .15s, transform .15s; }
+    .proto-card:hover { border-color: var(--proto-color, var(--accent)); transform: translateY(-1px); }
+    .proto-card-header { display: flex; align-items: center; justify-content: space-between; }
+    .proto-card-name  { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+    .proto-card-count { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+    .proto-card-bar-wrap { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .proto-card-bar  { height: 100%; border-radius: 99px; background: var(--proto-color, var(--accent)); transition: width .6s cubic-bezier(.4,0,.2,1); }
+    .proto-card-pct  { font-size: 10px; color: var(--muted); font-weight: 600; }
+    .proto-vless    { --proto-color: #0ea5a0; } .proto-vmess  { --proto-color: #d97706; }
+    .proto-trojan   { --proto-color: #7c3aed; } .proto-ss     { --proto-color: #2563eb; }
+    .proto-ssr      { --proto-color: #1d4ed8; } .proto-http   { --proto-color: #059669; }
+    .proto-socks5   { --proto-color: #64748b; } .proto-hysteria { --proto-color: #db2777; }
+    .proto-hy2      { --proto-color: #be185d; } .proto-tuic   { --proto-color: #0891b2; }
+    .proto-summary-bar { display: flex; height: 8px; border-radius: 99px; overflow: hidden; gap: 1px; margin-bottom: 16px; }
+    .proto-summary-seg { height: 100%; border-radius: 1px; }
+    .proto-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .proto-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .proto-legend-dot  { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
 
-    /* 协议大卡片 */
-    .proto-card {
-        padding: 16px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        background: var(--glass-bg);
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        transition: border-color 0.15s, transform 0.15s;
-        cursor: default;
-    }
-    .proto-card:hover {
-        border-color: var(--proto-color, var(--accent));
-        transform: translateY(-1px);
-    }
-    .proto-card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .proto-card-name {
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-    }
-    .proto-card-count {
-        font-size: 22px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-    }
-    .proto-card-bar-wrap {
-        height: 4px;
-        background: var(--border);
-        border-radius: 99px;
-        overflow: hidden;
-    }
-    .proto-card-bar {
-        height: 100%;
-        border-radius: 99px;
-        background: var(--proto-color, var(--accent));
-        transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
-    }
-    .proto-card-pct {
-        font-size: 10px;
-        color: var(--muted);
-        font-weight: 600;
-    }
-
-    /* 协议颜色语义 */
-    .proto-vless  { --proto-color: #0ea5a0; }
-    .proto-vmess  { --proto-color: #d97706; }
-    .proto-trojan { --proto-color: #7c3aed; }
-    .proto-ss     { --proto-color: #2563eb; }
-    .proto-ssr    { --proto-color: #1d4ed8; }
-    .proto-http   { --proto-color: #059669; }
-    .proto-socks5 { --proto-color: #64748b; }
-    .proto-hysteria { --proto-color: #db2777; }
-    .proto-hy2    { --proto-color: #be185d; }
-    .proto-tuic   { --proto-color: #0891b2; }
-    .proto-other  { --proto-color: #94a3b8; }
-
-    /* 协议总览横条（小型） */
-    .proto-summary-bar {
-        display: flex;
-        height: 8px;
-        border-radius: 99px;
-        overflow: hidden;
-        gap: 1px;
-        margin-bottom: 16px;
-    }
-    .proto-summary-seg {
-        height: 100%;
-        transition: flex 0.5s ease;
-        border-radius: 1px;
-    }
-
-    /* 协议图例 */
-    .proto-legend {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
-    .proto-legend-item {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 11px;
-        color: var(--muted);
-    }
-    .proto-legend-dot {
-        width: 8px; height: 8px;
-        border-radius: 2px;
-        flex-shrink: 0;
-    }
-
-    /* ════════════════════════════════════════
-       Tab 4：订阅排名
-    ════════════════════════════════════════ */
-
-    /* 复制操作栏（固定在内容顶部） */
+    /* === Tab 4: subs + copy toolbar === */
+    /*
+     * copy-toolbar：永不换行（flex-wrap:nowrap）
+     * 按钮文字放在 span.btn-text 里，720px 以下 CSS 隐藏，仅剩图标
+     */
     .copy-toolbar {
         display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 10px 14px;
+        gap: 6px;
+        padding: 9px 12px;
         margin-bottom: 14px;
         border-radius: 10px;
         border: 1px solid var(--border);
         background: var(--glass-bg);
-        backdrop-filter: blur(8px);
-        flex-wrap: wrap;
+        flex-wrap: nowrap;    /* 永不换行 */
+        overflow: hidden;
     }
     .copy-toolbar-label {
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--muted);
-        flex-shrink: 0;
-        margin-right: 4px;
+        font-size: 11px; font-weight: 600; color: var(--muted);
+        flex-shrink: 0; white-space: nowrap;
     }
+    @media (max-width: 480px) { .copy-toolbar-label { display: none; } }
+
     .copy-btn {
         display: inline-flex;
         align-items: center;
         gap: 5px;
-        padding: 5px 12px;
+        padding: 5px 10px;
         border-radius: 7px;
         border: 1px solid var(--border);
         background: transparent;
         color: var(--fg);
-        font-size: 11px;
-        font-weight: 600;
-        font-family: inherit;
+        font-size: 11px; font-weight: 600; font-family: inherit;
         cursor: pointer;
-        transition: color 0.15s, border-color 0.15s, background 0.15s;
+        transition: color .15s, border-color .15s, background .15s;
         white-space: nowrap;
+        flex-shrink: 0;
     }
     .copy-btn svg { width: 11px; height: 11px; flex-shrink: 0; }
-    .copy-btn:hover {
-        color: var(--accent);
-        border-color: var(--accent);
-        background: color-mix(in srgb, var(--accent) 8%, transparent);
-    }
-    .copy-btn.copied {
-        color: var(--success);
-        border-color: var(--success);
-        background: color-mix(in srgb, var(--success) 8%, transparent);
-    }
-    .copy-scope {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 11px;
-        color: var(--muted);
-    }
-    .copy-scope label {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        cursor: pointer;
-    }
+    .copy-btn:hover  { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+    .copy-btn.copied { color: var(--success); border-color: var(--success); background: color-mix(in srgb, var(--success) 8%, transparent); }
+
+    .copy-scope { margin-left: auto; display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); flex-shrink: 0; white-space: nowrap; }
+    .copy-scope label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
 
     .sub-list { display: flex; flex-direction: column; gap: 8px; }
-    .sub-item {
-        padding: 12px 14px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        background: var(--glass-bg);
-        transition: background 0.15s;
-    }
+    .sub-item { padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--glass-bg); transition: background .15s; }
     .sub-item:hover { background: var(--input-bg); }
     .sub-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; min-width: 0; }
-    .sub-rank {
-        flex-shrink: 0;
-        width: 18px;
-        height: 18px;
-        border-radius: 4px;
-        background: var(--border);
-        display: flex; align-items: center; justify-content: center;
-        font-size: 9px;
-        font-weight: 700;
-        color: var(--muted);
-    }
-    .sub-item:nth-child(1) .sub-rank { background: color-mix(in srgb, gold 30%, transparent); color: #b8860b; }
+    .sub-rank { flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: var(--muted); }
+    .sub-item:nth-child(1) .sub-rank { background: color-mix(in srgb, gold   30%, transparent); color: #b8860b; }
     .sub-item:nth-child(2) .sub-rank { background: color-mix(in srgb, silver 30%, transparent); color: #64748b; }
     .sub-item:nth-child(3) .sub-rank { background: color-mix(in srgb, #cd7f32 25%, transparent); color: #cd7f32; }
-    .sub-url {
-        flex: 1; font-size: 11px; font-family: var(--font-mono, monospace);
-        color: var(--muted); white-space: nowrap; overflow: hidden;
-        text-overflow: ellipsis; min-width: 0;
-    }
+    .sub-url { flex: 1; font-size: 11px; font-family: var(--font-mono,monospace); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
     .sub-rate  { font-size: 13px; font-weight: 700; flex-shrink: 0; }
     .sub-bar-wrap { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 6px; }
-    .sub-bar  { height: 100%; border-radius: 99px; transition: width 0.5s ease; }
+    .sub-bar  { height: 100%; border-radius: 99px; transition: width .5s ease; }
     .sub-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 11px; color: var(--muted); }
-    .tag-pill {
-        padding: 1px 6px; border-radius: 4px;
-        background: var(--input-bg); border: 1px solid var(--border);
-        font-size: 10px; white-space: nowrap;
-    }
-
-    .bad-list {
-        border-radius: 10px; border: 1px solid var(--border);
-        overflow: hidden; background: var(--glass-bg);
-    }
-    .bad-item {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 8px 12px; border-bottom: 1px solid var(--border); gap: 8px;
-    }
+    .tag-pill { padding: 1px 6px; border-radius: 4px; background: var(--input-bg); border: 1px solid var(--border); font-size: 10px; white-space: nowrap; }
+    .bad-list { border-radius: 10px; border: 1px solid var(--border); overflow: hidden; background: var(--glass-bg); }
+    .bad-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid var(--border); gap: 8px; }
     .bad-item:last-child { border-bottom: none; }
-    .bad-url {
-        font-size: 11px; font-family: var(--font-mono, monospace);
-        color: var(--muted); overflow: hidden; text-overflow: ellipsis;
-        white-space: nowrap; flex: 1; min-width: 0;
-    }
+    .bad-url { font-size: 11px; font-family: var(--font-mono,monospace); color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
     .bad-count { font-size: 11px; color: var(--muted); flex-shrink: 0; }
 
-    /* 加载动画 */
-    .loading-dots::after { content: ''; animation: dots 1.2s steps(4, end) infinite; }
-    @keyframes dots { 0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'} }
+    /* === Tab 5: config analysis === */
+    .cfg-analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .cfg-card { padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--glass-bg); }
+    .cfg-card-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .cfg-card-title svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .cfg-kv { display: flex; align-items: baseline; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent); gap: 8px; }
+    .cfg-kv:last-child { border-bottom: none; }
+    .cfg-k { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+    .cfg-v { font-size: 12px; font-weight: 600; color: var(--fg); text-align: right; word-break: break-all; }
+    .cfg-v.ok   { color: var(--success); }
+    .cfg-v.warn { color: var(--warning); }
+    .cfg-v.bad  { color: var(--danger); }
+    .suggest-list { display: flex; flex-direction: column; gap: 6px; }
+    .suggest-item { display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px; border-radius: 8px; font-size: 12px; line-height: 1.5; border: 1px solid transparent; }
+    .suggest-item svg { width: 13px; height: 13px; flex-shrink: 0; margin-top: 1px; }
+    .suggest-item.info { background: color-mix(in srgb, var(--accent)  8%, transparent); border-color: color-mix(in srgb, var(--accent)  20%, transparent); }
+    .suggest-item.warn { background: color-mix(in srgb, var(--warning) 8%, transparent); border-color: color-mix(in srgb, var(--warning) 20%, transparent); }
+    .suggest-item.good { background: color-mix(in srgb, var(--success) 8%, transparent); border-color: color-mix(in srgb, var(--success) 20%, transparent); }
+    .suggest-item.info svg { color: var(--accent);  }
+    .suggest-item.warn svg { color: var(--warning); }
+    .suggest-item.good svg { color: var(--success); }
 
-    /* 页脚 */
-    .page-footer {
-        padding: 10px 20px;
-        border-top: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        background: var(--glass-bg);
-        flex-shrink: 0;
-    }
+    /* loading / footer */
+    .loading-dots::after { content: ''; animation: dots 1.2s steps(4,end) infinite; }
+    @keyframes dots { 0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'} }
+    .page-footer { padding: 10px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: center; gap: 16px; background: var(--glass-bg); flex-shrink: 0; }
     .footer-icons { display: flex; align-items: center; gap: 12px; }
-    .footer-icon  { width: 15px; height: 15px; opacity: 0.6; transition: opacity 0.15s; display: block; filter: invert(var(--invert)); }
-    .footer-icons a:hover .footer-icon { opacity: 0.75; }
+    .footer-icon  { width: 15px; height: 15px; opacity: .6; transition: opacity .15s; display: block; filter: invert(var(--invert)); }
+    .footer-icons a:hover .footer-icon { opacity: .75; }
     .footer-copy  { font-size: 11px; color: var(--muted); }
     .footer-copy a { color: var(--muted); text-decoration: none; }
     .footer-copy a:hover { color: var(--accent); }
-
-    code {
-        font-family: var(--font-mono, monospace);
-        background: var(--placehoder-bg, rgba(0,0,0,.06));
-        color: var(--danger); padding: 1px 5px; border-radius: 4px; font-size: 11px;
-    }
-
-    @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(10px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
+    code { font-family: var(--font-mono,monospace); background: var(--placehoder-bg,rgba(0,0,0,.06)); color: var(--danger); padding: 1px 5px; border-radius: 4px; font-size: 11px; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
     </style>
 </head>
 <body>
 
-<!-- ① 登录 / 占位场景 -->
+<!-- login/placeholder scene -->
 <div class="login-scene" id="loginScene">
     <div class="login-card">
-        <!-- 卡片内容区 -->
         <div class="login-card-body">
             <div class="status-badge" id="placeholderBadge">Analysis Report</div>
             <h1>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="20" x2="18" y2="10"/>
-                    <line x1="12" y1="20" x2="12" y2="4"/>
-                    <line x1="6"  y1="20" x2="6"  y2="14"/>
-                    <line x1="2"  y1="20" x2="22" y2="20"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
                 检测结果分析
             </h1>
-
-            <!-- 加载中 -->
-            <p class="desc" id="placeholderMsg" style="display:none">
-                正在获取报告<span class="loading-dots"></span>
-            </p>
-
-            <!-- 内嵌登录框 -->
+            <p class="desc" id="placeholderMsg" style="display:none">正在获取报告<span class="loading-dots"></span></p>
             <div id="inlineLoginArea" style="display:none">
                 <p class="desc">请输入 API 密钥以查看检测分析报告。</p>
                 <div class="auth-area">
-                    <input class="auth-input" type="password" id="inlineApiKey"
-                           placeholder="输入 API 密钥..."
-                           autocomplete="current-password"
-                           onkeydown="if(event.keyCode===13)inlineLogin()">
+                    <input class="auth-input" type="password" id="inlineApiKey" placeholder="输入 API 密钥..." autocomplete="current-password" onkeydown="if(event.keyCode===13)inlineLogin()">
                     <p class="auth-hint" id="loginHint"></p>
                     <button class="btn-auth" id="inlineLoginBtn" onclick="inlineLogin()">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12 5 19 12 12 19"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         验证并查看
                     </button>
                 </div>
             </div>
-
-            <!-- 错误 / 无数据 -->
             <div class="retry-area" id="retryArea" style="display:none">
                 <p class="retry-msg" id="retryMsg"></p>
                 <button class="btn-auth" onclick="initPage()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="1 4 1 10 7 10"/>
-                        <path d="M3.51 15a9 9 0 1 0 .49-3.33"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.33"/></svg>
                     重试
                 </button>
             </div>
         </div>
-
-        <!-- 卡片底部版权，紧贴卡片底边，无多余内边距 -->
         <div class="login-card-footer">
-            <div class="brand-info">
-                <img src="/static/icon/favicon.svg" alt="logo">Subs-Check-PRO
-            </div>
+            <div class="brand-info"><img src="/static/icon/favicon.svg" alt="logo">Subs-Check-PRO</div>
             <div class="footer-meta">Analysis Report</div>
         </div>
     </div>
-
     <div class="login-bottom">
         <div class="footer-icons">
             <a href="https://github.com/sinspired/subs-check-pro" title="GitHub"><img src="/static/icon/github.svg" alt="GitHub" class="footer-icon"/></a>
             <a href="https://hub.docker.com/r/sinspired/subs-check-pro" title="Docker"><img src="/static/icon/docker.svg" alt="Docker" class="footer-icon"/></a>
             <a href="https://t.me/subs_check_pro" title="Telegram"><img src="/static/icon/telegram.svg" alt="Telegram" class="footer-icon"/></a>
         </div>
-        <div class="footer-copy">
-            © 2025 <a href="https://github.com/sinspired" target="_blank" rel="noopener">sinspired</a> ·
-            <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPL-3.0</a>
-        </div>
+        <div class="footer-copy">© 2025 <a href="https://github.com/sinspired" target="_blank" rel="noopener">sinspired</a> · <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPL-3.0</a></div>
     </div>
 </div>
 
-<!-- ② 报告场景 -->
+<!-- report scene -->
 <div class="report-scene" id="reportScene">
-
-    <!-- 顶部导航栏 -->
     <div class="topbar">
-        <div class="topbar-brand">
-            <img src="/static/icon/favicon.svg" alt="logo">
-            Subs-Check-PRO
-        </div>
+        <div class="topbar-brand"><img src="/static/icon/favicon.svg" alt="logo">Subs-Check-PRO</div>
         <div class="topbar-meta" id="navMeta">分析报告</div>
         <div class="topbar-actions">
             <button class="topbar-btn" id="themeToggle" aria-label="切换主题" title="切换主题">
-                <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" style="display:none">
-                    <circle cx="12" cy="12" r="5"/>
-                    <line x1="12" y1="1"  x2="12" y2="3"/>
-                    <line x1="12" y1="21" x2="12" y2="23"/>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                    <line x1="1" y1="12" x2="3" y2="12"/>
-                    <line x1="21" y1="12" x2="23" y2="12"/>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-                <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
+                <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 <span id="themeLabel">浅色</span>
             </button>
             <button class="topbar-btn danger" onclick="doLogout()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                    <polyline points="16 17 21 12 16 7"/>
-                    <line x1="21" y1="12" x2="9" y2="12"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                 退出
             </button>
         </div>
     </div>
 
-    <!-- 主体区 -->
     <div class="body-area">
-
-        <!-- 侧边栏（大屏） -->
         <nav class="sidebar" id="sidebar">
             <div class="sidebar-label">导航</div>
             <button class="sidebar-btn active" data-tab="overview" onclick="switchTab('overview')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                    <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                 概览
             </button>
             <button class="sidebar-btn" data-tab="geo" onclick="switchTab('geo')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="2" y1="12" x2="22" y2="12"/>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                </svg>
-                地理分布
-                <span class="s-badge" id="sb-geo">0</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                地理分布 <span class="s-badge" id="sb-geo">0</span>
             </button>
             <button class="sidebar-btn" data-tab="proto" onclick="switchTab('proto')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                </svg>
-                协议分析
-                <span class="s-badge" id="sb-proto">0</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                协议分析 <span class="s-badge" id="sb-proto">0</span>
             </button>
             <div class="sidebar-divider"></div>
             <button class="sidebar-btn" data-tab="subs" onclick="switchTab('subs')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="8" y1="6"  x2="21" y2="6"/>
-                    <line x1="8" y1="12" x2="21" y2="12"/>
-                    <line x1="8" y1="18" x2="21" y2="18"/>
-                    <line x1="3" y1="6"  x2="3.01" y2="6"/>
-                    <line x1="3" y1="12" x2="3.01" y2="12"/>
-                    <line x1="3" y1="18" x2="3.01" y2="18"/>
-                </svg>
-                订阅排名
-                <span class="s-badge" id="sb-subs">0</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                订阅排名 <span class="s-badge" id="sb-subs">0</span>
+            </button>
+            <button class="sidebar-btn" data-tab="cfgana" onclick="switchTab('cfgana')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+                配置分析
             </button>
         </nav>
 
-        <!-- 内容区 -->
         <div class="content-area">
-
-            <!-- Tab 栏（小屏） -->
+            <!-- tab bar (small screen) -->
             <div class="tab-bar" id="tabBar" role="tablist">
                 <button class="tab-btn active" role="tab" data-tab="overview" onclick="switchTab('overview')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                        <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                     <span>概览</span>
                 </button>
                 <button class="tab-btn" role="tab" data-tab="geo" onclick="switchTab('geo')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                     <span>地理</span>
                 </button>
                 <button class="tab-btn" role="tab" data-tab="proto" onclick="switchTab('proto')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                     <span>协议</span>
                 </button>
                 <button class="tab-btn" role="tab" data-tab="subs" onclick="switchTab('subs')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="8" y1="6"  x2="21" y2="6"/>
-                        <line x1="8" y1="12" x2="21" y2="12"/>
-                        <line x1="8" y1="18" x2="21" y2="18"/>
-                        <line x1="3" y1="6"  x2="3.01" y2="6"/>
-                        <line x1="3" y1="12" x2="3.01" y2="12"/>
-                        <line x1="3" y1="18" x2="3.01" y2="18"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                     <span>订阅</span>
+                </button>
+                <button class="tab-btn" role="tab" data-tab="cfgana" onclick="switchTab('cfgana')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                    <span>配置</span>
                 </button>
             </div>
 
-            <!-- Tab 1：概览 -->
             <div class="tab-content active" id="tab-overview" role="tabpanel">
                 <div class="tab-inner">
                     <div id="heroSummary"></div>
@@ -1167,18 +507,12 @@
                 </div>
             </div>
 
-            <!-- Tab 2：地理分布 -->
             <div class="tab-content" id="tab-geo" role="tabpanel">
                 <div class="tab-inner">
                     <div class="geo-view">
                         <div class="map-slot" id="mapSlot">
                             <div class="map-slot-hint">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <line x1="2" y1="12" x2="22" y2="12"/>
-                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                                 <span>地图视图（开发中）</span>
                             </div>
                         </div>
@@ -1187,12 +521,10 @@
                 </div>
             </div>
 
-            <!-- Tab 3：协议分析 -->
             <div class="tab-content" id="tab-proto" role="tabpanel">
                 <div class="tab-inner" id="protoContent"></div>
             </div>
 
-            <!-- Tab 4：订阅排名 -->
             <div class="tab-content" id="tab-subs" role="tabpanel">
                 <div class="tab-inner">
                     <div id="copyToolbar"></div>
@@ -1201,667 +533,551 @@
                 </div>
             </div>
 
+            <!-- Tab 5: config analysis -->
+            <div class="tab-content" id="tab-cfgana" role="tabpanel">
+                <div class="tab-inner" id="cfganaContent"></div>
+            </div>
         </div>
     </div>
 
-    <!-- 页脚 -->
     <footer class="page-footer">
         <div class="footer-icons">
             <a href="https://github.com/sinspired/subs-check-pro" title="GitHub"><img src="/static/icon/github.svg" alt="GitHub" class="footer-icon"/></a>
             <a href="https://hub.docker.com/r/sinspired/subs-check-pro" title="Docker"><img src="/static/icon/docker.svg" alt="Docker" class="footer-icon"/></a>
             <a href="https://t.me/subs_check_pro" title="Telegram"><img src="/static/icon/telegram.svg" alt="Telegram" class="footer-icon"/></a>
         </div>
-        <div class="footer-copy">
-            © 2025 <a href="https://github.com/sinspired" target="_blank" rel="noopener">sinspired</a> ·
-            <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPL-3.0</a>
-        </div>
+        <div class="footer-copy">© 2025 <a href="https://github.com/sinspired" target="_blank" rel="noopener">sinspired</a> · <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPL-3.0</a></div>
     </footer>
-
 </div>
 
 <script>
-// ── 主题初始化 ──
-(function () {
-    const saved  = localStorage.getItem('theme');
-    const prefer = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    applyTheme(saved || prefer);
+// ── theme ──
+(function(){
+    const saved=localStorage.getItem('theme');
+    const prefer=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+    applyTheme(saved||prefer);
 })();
-
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    const isDark = theme === 'dark';
-    const moon   = document.getElementById('iconMoon');
-    const sun    = document.getElementById('iconSun');
-    const label  = document.getElementById('themeLabel');
-    if (moon)  moon.style.display  = isDark ? 'block' : 'none';
-    if (sun)   sun.style.display   = isDark ? 'none'  : 'block';
-    if (label) label.textContent   = isDark ? '深色'  : '浅色';
-    const btn = document.getElementById('themeToggle');
-    if (btn) btn.setAttribute('aria-pressed', String(isDark));
+function applyTheme(theme){
+    document.documentElement.setAttribute('data-theme',theme);
+    localStorage.setItem('theme',theme);
+    const isDark=theme==='dark';
+    const moon=document.getElementById('iconMoon');
+    const sun=document.getElementById('iconSun');
+    const label=document.getElementById('themeLabel');
+    if(moon)moon.style.display=isDark?'block':'none';
+    if(sun)sun.style.display=isDark?'none':'block';
+    if(label)label.textContent=isDark?'深色':'浅色';
+    const btn=document.getElementById('themeToggle');
+    if(btn)btn.setAttribute('aria-pressed',String(isDark));
 }
-
-document.getElementById('themeToggle')?.addEventListener('click', () => {
-    const cur = document.documentElement.getAttribute('data-theme');
-    applyTheme(cur === 'dark' ? 'light' : 'dark');
+document.getElementById('themeToggle')?.addEventListener('click',()=>{
+    const cur=document.documentElement.getAttribute('data-theme');
+    applyTheme(cur==='dark'?'light':'dark');
 });
 
-const STORAGE_KEY = 'subscheck_api_key';
+const STORAGE_KEY='subscheck_api_key';
+function getKey(){try{return localStorage.getItem(STORAGE_KEY)||sessionStorage.getItem(STORAGE_KEY)||null;}catch{return null;}}
 
-function getKey() {
-    try { return localStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY) || null; }
-    catch { return null; }
+async function sfetch(url,opts={}){
+    const key=getKey();
+    if(!key)return{ok:false,status:401,error:'未认证'};
+    opts.headers={...opts.headers,'X-API-Key':key};
+    try{
+        const r=await fetch(url,opts);
+        const ct=r.headers.get('content-type')||'';
+        const text=await r.text();
+        const payload=ct.includes('application/json')?JSON.parse(text):text;
+        if(r.status===401){try{localStorage.removeItem(STORAGE_KEY);}catch{}showLoginArea('API 密钥已失效，请重新输入。');return{ok:false,status:401,payload};}
+        return r.ok?{ok:true,status:r.status,payload}:{ok:false,status:r.status,payload};
+    }catch(e){return{ok:false,error:e.message};}
 }
 
-async function sfetch(url, opts = {}) {
-    const key = getKey();
-    if (!key) return { ok: false, status: 401, error: '未认证' };
-    opts.headers = { ...opts.headers, 'X-API-Key': key };
-    try {
-        const r    = await fetch(url, opts);
-        const ct   = r.headers.get('content-type') || '';
-        const text = await r.text();
-        const payload = ct.includes('application/json') ? JSON.parse(text) : text;
-        if (r.status === 401) {
-            try { localStorage.removeItem(STORAGE_KEY); } catch {}
-            showLoginArea('API 密钥已失效，请重新输入。');
-            return { ok: false, status: 401, payload };
-        }
-        return r.ok ? { ok: true, status: r.status, payload } : { ok: false, status: r.status, payload };
-    } catch (e) {
-        return { ok: false, error: e.message };
-    }
+function showScene(name){
+    document.getElementById('loginScene').style.display=name==='login'?'flex':'none';
+    document.getElementById('reportScene').style.display=name==='report'?'flex':'none';
+}
+function showLoading(){
+    showScene('login');_setBadge('Analysis Report');
+    document.getElementById('placeholderMsg').style.display='';
+    document.getElementById('inlineLoginArea').style.display='none';
+    document.getElementById('retryArea').style.display='none';
+}
+function showLoginArea(hint=''){
+    showScene('login');_setBadge('Auth Required');
+    document.getElementById('placeholderMsg').style.display='none';
+    document.getElementById('inlineLoginArea').style.display='';
+    document.getElementById('retryArea').style.display='none';
+    const input=document.getElementById('inlineApiKey');
+    const hintEl=document.getElementById('loginHint');
+    if(hint){input.classList.add('error');hintEl.textContent=hint;}
+    else{input.classList.remove('error');hintEl.textContent='';input.placeholder='输入 API 密钥...';}
+    setTimeout(()=>input.focus(),50);
+}
+function showRetryArea(msg,badge='Error'){
+    showScene('login');_setBadge(badge);
+    document.getElementById('placeholderMsg').style.display='none';
+    document.getElementById('inlineLoginArea').style.display='none';
+    document.getElementById('retryArea').style.display='';
+    document.getElementById('retryMsg').textContent=msg;
+}
+function _setBadge(text){document.getElementById('placeholderBadge').textContent=text;}
+
+function switchTab(name){
+    document.querySelectorAll('.sidebar-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+name));
 }
 
-function showScene(name) {
-    document.getElementById('loginScene').style.display  = name === 'login'  ? 'flex' : 'none';
-    document.getElementById('reportScene').style.display = name === 'report' ? 'flex' : 'none';
-}
-
-function showLoading() {
-    showScene('login');
-    _setBadge('Analysis Report');
-    document.getElementById('placeholderMsg').style.display  = '';
-    document.getElementById('inlineLoginArea').style.display = 'none';
-    document.getElementById('retryArea').style.display       = 'none';
-}
-
-function showLoginArea(hint = '') {
-    showScene('login');
-    _setBadge('Auth Required');
-    document.getElementById('placeholderMsg').style.display  = 'none';
-    document.getElementById('inlineLoginArea').style.display = '';
-    document.getElementById('retryArea').style.display       = 'none';
-    const input  = document.getElementById('inlineApiKey');
-    const hintEl = document.getElementById('loginHint');
-    if (hint) { input.classList.add('error'); hintEl.textContent = hint; }
-    else { input.classList.remove('error'); hintEl.textContent = ''; input.placeholder = '输入 API 密钥...'; }
-    setTimeout(() => input.focus(), 50);
-}
-
-function showRetryArea(msg, badge = 'Error') {
-    showScene('login');
-    _setBadge(badge);
-    document.getElementById('placeholderMsg').style.display  = 'none';
-    document.getElementById('inlineLoginArea').style.display = 'none';
-    document.getElementById('retryArea').style.display       = '';
-    document.getElementById('retryMsg').textContent          = msg;
-}
-
-function _setBadge(text) { document.getElementById('placeholderBadge').textContent = text; }
-
-function switchTab(name) {
-    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + name));
-}
-
-async function inlineLogin() {
-    const input  = document.getElementById('inlineApiKey');
-    const btn    = document.getElementById('inlineLoginBtn');
-    const hintEl = document.getElementById('loginHint');
-    const k      = input?.value?.trim();
-    input.classList.remove('error');
-    hintEl.textContent = '';
-    if (!k) { input.classList.add('error'); hintEl.textContent = '请输入 API 密钥'; input.focus(); return; }
-    btn.disabled = true;
-    try {
-        const resp = await fetch('/api/status', { headers: { 'X-API-Key': k } });
-        if (resp.status === 401) { input.classList.add('error'); hintEl.textContent = 'API 密钥无效，请重试'; input.value = ''; input.focus(); return; }
-        if (!resp.ok) { showRetryArea(`验证失败（HTTP ${resp.status}），请检查服务状态。`); return; }
-        try { localStorage.setItem(STORAGE_KEY, k); } catch {}
+async function inlineLogin(){
+    const input=document.getElementById('inlineApiKey');
+    const btn=document.getElementById('inlineLoginBtn');
+    const hintEl=document.getElementById('loginHint');
+    const k=input?.value?.trim();
+    input.classList.remove('error');hintEl.textContent='';
+    if(!k){input.classList.add('error');hintEl.textContent='请输入 API 密钥';input.focus();return;}
+    btn.disabled=true;
+    try{
+        const resp=await fetch('/api/status',{headers:{'X-API-Key':k}});
+        if(resp.status===401){input.classList.add('error');hintEl.textContent='API 密钥无效，请重试';input.value='';input.focus();return;}
+        if(!resp.ok){showRetryArea(`验证失败（HTTP ${resp.status}），请检查服务状态。`);return;}
+        try{localStorage.setItem(STORAGE_KEY,k);}catch{}
         await loadReport();
-    } catch (e) {
-        showRetryArea(`网络错误：${e.message}`);
-    } finally {
-        btn.disabled = false;
-    }
+    }catch(e){showRetryArea(`网络错误：${e.message}`);}
+    finally{btn.disabled=false;}
 }
 
-async function loadReport() {
+async function loadReport(){
     showLoading();
-    const r = await sfetch('/api/analysis-report');
-    if (!r.ok) { if (r.status !== 401) showRetryArea(`加载失败（HTTP ${r.status}），请检查服务是否正常。`); return; }
-    if (!r.payload?.report) { showRetryArea('尚未生成检测报告，请先在主界面运行一次节点检测。', 'No Data'); return; }
-    try {
-        const report = YAML.parse(r.payload.report);
-        renderReport(report);
-        showScene('report');
-    } catch (e) {
-        showRetryArea(`报告解析失败：${e.message}`);
-    }
+    const r=await sfetch('/api/analysis-report');
+    if(!r.ok){if(r.status!==401)showRetryArea(`加载失败（HTTP ${r.status}），请检查服务是否正常。`);return;}
+    if(!r.payload?.report){showRetryArea('尚未生成检测报告，请先在主界面运行一次节点检测。','No Data');return;}
+    try{
+        const report=YAML.parse(r.payload.report);
+        renderReport(report);showScene('report');
+    }catch(e){showRetryArea(`报告解析失败：${e.message}`);}
 }
 
-function doLogout() {
-    try { localStorage.removeItem(STORAGE_KEY); } catch {}
-    showLoginArea();
-}
-
-async function initPage() {
-    if (!getKey()) { showLoginArea(); return; }
-    await loadReport();
-}
-
-window.addEventListener('storage', e => {
-    if (e.key === STORAGE_KEY && !e.newValue) showLoginArea('已在其他页面退出登录，请重新输入。');
-});
+function doLogout(){try{localStorage.removeItem(STORAGE_KEY);}catch{}showLoginArea();}
+async function initPage(){if(!getKey()){showLoginArea();return;}await loadReport();}
+window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY&&!e.newValue)showLoginArea('已在其他页面退出登录，请重新输入。');});
 
 // ══════════════════════════════════════════════════════════════
-// 渲染
+// render
 // ══════════════════════════════════════════════════════════════
+let _reportData=null;
 
-// 全局数据缓存，供复制功能使用
-let _reportData = null;
-
-function renderReport(r) {
-    _reportData = r;
-    const ci = r.check_info      || {};
-    const ga = r.global_analysis || {};
-    const sr = r.subs_ranking    || [];
-    const sb = r.subs_ranking_bad || [];
-
-    document.getElementById('navMeta').textContent =
-        ci.check_time ? `${ci.check_time}  ·  耗时 ${ci.check_duration || '-'}` : '分析报告';
-
-    const geoCount   = Object.keys(ga.geography_distribution || {}).length;
-    const protoCount = Object.keys(ga.protocol_distribution  || {}).length;
-    _sb('sb-geo',   geoCount);
-    _sb('sb-proto', protoCount);
-    _sb('sb-subs',  sr.length);
-
-    renderOverview(r, ci, ga, sr.length, geoCount, protoCount);
-    renderGeo(ga);
-    renderProto(ga);
-    renderSubs(sr, sb);
+function renderReport(r){
+    _reportData=r;
+    const ci=r.check_info||{};
+    const ga=r.global_analysis||{};
+    const sr=r.subs_ranking||[];
+    const sb=r.subs_ranking_bad||[];
+    document.getElementById('navMeta').textContent=ci.check_time?`${ci.check_time}  ·  耗时 ${ci.check_duration||'-'}`:'分析报告';
+    const geoCount=Object.keys(ga.geography_distribution||{}).length;
+    const protoCount=Object.keys(ga.protocol_distribution||{}).length;
+    _sb('sb-geo',geoCount);_sb('sb-proto',protoCount);_sb('sb-subs',sr.length);
+    renderOverview(r,ci,ga,sr.length,geoCount,protoCount);
+    renderGeo(ga);renderProto(ga);renderSubs(sr,sb);renderConfig(ci,ga,sr,sb);
 }
+function _sb(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
 
-function _sb(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
-
-// ── Tab 1：概览（重设计）──────────────────────────────────────
-function renderOverview(r, ci, ga, subCount, geoCount, protoCount) {
-
-    // ① 一句话核心摘要
-    const rawSummary = (r.summary || '').trim();
-    const heroText   = buildHeroSentence(ci, ga);
-    document.getElementById('heroSummary').innerHTML = `
+// ── Tab 1: overview ──────────────────────────────────────────
+function renderOverview(r,ci,ga,subCount,geoCount,protoCount){
+    const rawSummary=(r.summary||'').trim();
+    document.getElementById('heroSummary').innerHTML=`
         <div class="hero-summary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-            <div class="hero-summary-text">${heroText}</div>
-        </div>
-    `;
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div class="hero-summary-text">${buildHeroSentence(ci,ga)}</div>
+        </div>`;
 
-    // ② 结构化摘要芯片（4 或 6 个）
-    const minSpeedVal = ci.check_min_speed;
-    const minSpeedStr = (minSpeedVal && String(minSpeedVal) !== '0') ? minSpeedVal + ' KB/s' : '未开启';
-    const total = ga.alive_count || 0;
+    const minSpeedVal=ci.check_min_speed;
+    const minSpeedStr=(minSpeedVal&&String(minSpeedVal)!=='0')?minSpeedVal+' KB/s':'未开启';
+    const total=ga.alive_count||0;
+    const qm=ga.quality_metrics||{};
+    const cfd=qm.cf_details||{};
+    const cfCon=cfd['consistent_\u00b9\u207a']||{};
+    const cfIncon=cfd['inconsistent_\u2070']||{};
+    let vps={};
+    for(const[k,v]of Object.entries(qm)){if(k.startsWith('vps_details')&&typeof v==='object'){vps=v;break;}}
+    const cfConTotal=Object.values(cfCon).reduce((a,b)=>a+b,0);
+    const vpsTotal=Object.values(vps).reduce((a,b)=>a+b,0);
 
-    const qm      = ga.quality_metrics || {};
-    const cfd     = qm.cf_details      || {};
-    const cfCon   = cfd['consistent_¹⁺']  || {};
-    const cfIncon = cfd['inconsistent_⁰'] || {};
-    let vps = {};
-    for (const [k, v] of Object.entries(qm)) {
-        if (k.startsWith('vps_details') && typeof v === 'object') { vps = v; break; }
-    }
-    const cfConTotal = Object.values(cfCon).reduce((a, b) => a + b, 0);
-    const vpsTotal   = Object.values(vps).reduce((a, b) => a + b, 0);
-
-    const chips = [
-        {
-            label: '可用节点', value: total, accent: true,
-            sub: `检测 ${ci.check_count || '-'}`,
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
-            color: 'var(--accent)'
-        },
-        {
-            label: '覆盖地区', value: geoCount,
-            sub: `地理分布`,
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
-            color: 'var(--idle)'
-        },
-        {
-            label: 'CF 中转', value: cfConTotal,
-            sub: total ? Math.round(cfConTotal/total*100)+'%' : '0%',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>`,
-            color: 'var(--success)'
-        },
-        {
-            label: '独立 VPS', value: vpsTotal,
-            sub: total ? Math.round(vpsTotal/total*100)+'%' : '0%',
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
-            color: 'var(--warning)'
-        },
-        {
-            label: '流量消耗', value: ci.check_traffic || '-',
-            sub: `耗时 ${ci.check_duration || '-'}`,
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
-            color: 'var(--muted)'
-        },
-        {
-            label: '速度下限', value: minSpeedStr,
-            sub: `有效订阅 ${subCount} 个`,
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
-            color: 'var(--muted)'
-        },
+    const chips=[
+        {label:'可用节点',value:total,sub:`检测 ${ci.check_count||'-'}`,icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,color:'var(--accent)'},
+        {label:'覆盖地区',value:geoCount,sub:'地理分布',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,color:'var(--idle)'},
+        {label:'CF 中转',value:cfConTotal,sub:total?Math.round(cfConTotal/total*100)+'%':'0%',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>`,color:'var(--success)'},
+        {label:'独立 VPS',value:vpsTotal,sub:total?Math.round(vpsTotal/total*100)+'%':'0%',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,color:'var(--warning)'},
+        {label:'流量消耗',value:ci.check_traffic||'-',sub:`耗时 ${ci.check_duration||'-'}`,icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,color:'var(--muted)'},
+        {label:'速度下限',value:minSpeedStr,sub:`有效订阅 ${subCount} 个`,icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,color:'var(--muted)'},
     ];
-
-    document.getElementById('summaryChips').innerHTML = chips.map(c => `
+    document.getElementById('summaryChips').innerHTML=chips.map(c=>`
         <div class="summary-chip">
-            <div class="chip-icon" style="background:color-mix(in srgb, ${c.color} 12%, transparent); color:${c.color}">
-                ${c.icon}
-            </div>
+            <div class="chip-icon" style="background:color-mix(in srgb,${c.color} 12%,transparent);color:${c.color}">${c.icon}</div>
             <div class="chip-value" style="color:${c.color}">${c.value}</div>
             <div class="chip-label">${c.label}</div>
-            <div class="chip-sub">${c.sub || ''}</div>
-        </div>
-    `).join('');
+            <div class="chip-sub">${c.sub||''}</div>
+        </div>`).join('');
 
-    // ③ 媒体 & AI 解锁
-    const media = (ga.quality_metrics || {});
-    // 从 summary 文字中提取，或从 global 获取
-    // 直接解析 rawSummary 中的流媒体/AI 信息
-    const unlockData = parseUnlockFromSummary(rawSummary);
-    if (unlockData.length) {
-        document.getElementById('unlockSection').innerHTML = `
-            <div class="section-title" style="margin-bottom:8px">媒体 & AI 解锁</div>
-            <div class="unlock-row" style="margin-bottom:16px">
-                ${unlockData.map(u => `
-                    <span class="unlock-tag">
-                        <span class="ut-dot" style="background:${u.color}"></span>
-                        ${u.name}
-                        <span class="ut-count">${u.count}</span>
-                    </span>
-                `).join('')}
-            </div>
-        `;
-    } else {
-        document.getElementById('unlockSection').innerHTML = '';
-    }
+    const unlockData=parseUnlockFromSummary(rawSummary);
+    document.getElementById('unlockSection').innerHTML=unlockData.length?`
+        <div class="section-title" style="margin-bottom:8px">媒体 &amp; AI 解锁</div>
+        <div class="unlock-row" style="margin-bottom:16px">
+            ${unlockData.map(u=>`<span class="unlock-tag"><span class="ut-dot" style="background:${u.color}"></span>${u.name}<span class="ut-count">${u.count}</span></span>`).join('')}
+        </div>`:'';
 
-    // ④ 线路质量 + 快速导航
-    const cfRatio    = qm.cf_consistent_ratio || `${Math.round(cfConTotal / Math.max(1,total) * 100)}%`;
-    const vpsRatioStr = `${Math.round(vpsTotal / Math.max(1,total) * 100)}%`;
-    const cfBlock    = cfd['blocked_⁻¹'] || {};
+    const cfRatio=qm.cf_consistent_ratio||`${Math.round(cfConTotal/Math.max(1,total)*100)}%`;
+    const vpsRatioStr=`${Math.round(vpsTotal/Math.max(1,total)*100)}%`;
+    const cfBlock=cfd['blocked_\u207b\u00b9']||{};
 
-    document.getElementById('overviewExtra').innerHTML = `
+    document.getElementById('overviewExtra').innerHTML=`
         <div class="section-title" style="margin-top:4px">线路质量</div>
         <div class="overview-grid">
             <div class="stat-panel">
                 <div class="panel-title">CF 中转 vs 独立 VPS</div>
                 <div class="quality-row">
-                    <div class="quality-item">
-                        <div class="quality-val" style="color:var(--success)">${cfRatio}</div>
-                        <div class="quality-label">CF 中转 ¹⁺</div>
-                    </div>
-                    <div class="quality-item">
-                        <div class="quality-val" style="color:var(--idle)">${vpsRatioStr}</div>
-                        <div class="quality-label">独立 VPS ²</div>
-                    </div>
+                    <div class="quality-item"><div class="quality-val" style="color:var(--success)">${cfRatio}</div><div class="quality-label">CF 中转 \u00b9\u207a</div></div>
+                    <div class="quality-item"><div class="quality-val" style="color:var(--idle)">${vpsRatioStr}</div><div class="quality-label">独立 VPS \u00b2</div></div>
                 </div>
                 <div class="cf-breakdown">
-                    ${cfGroup('CF 一致 ¹⁺',  cfCon,   'var(--success)')}
-                    ${cfGroup('CF 不一致 ⁰', cfIncon, 'var(--warning)')}
-                    ${Object.keys(cfBlock).length ? cfGroup('CF 异常 ⁻¹', cfBlock, 'var(--danger)') : ''}
-                    ${cfGroup('独立 VPS ²',   vps,     'var(--idle)')}
+                    ${cfGroup('CF 一致 \u00b9\u207a',cfCon,'var(--success)')}
+                    ${cfGroup('CF 不一致 \u2070',cfIncon,'var(--warning)')}
+                    ${Object.keys(cfBlock).length?cfGroup('CF 异常 \u207b\u00b9',cfBlock,'var(--danger)'):''}
+                    ${cfGroup('独立 VPS \u00b2',vps,'var(--idle)')}
                 </div>
             </div>
             <div class="stat-panel">
                 <div class="panel-title">快速导航</div>
                 ${[
-                    ['geo',   '地理分布', `${geoCount} 个地区`,
-                     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`],
-                    ['proto', '协议分析', `${protoCount} 种协议`,
-                     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`],
-                    ['subs',  '订阅排名', `${subCount} 个有效`,
-                     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`],
-                ].map(([tab, label, sub, icon]) => `
+                    ['geo',   '地理分布',`${geoCount} 个地区`,`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`],
+                    ['proto', '协议分析',`${protoCount} 种协议`,`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`],
+                    ['subs',  '订阅排名',`${subCount} 个有效`,`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`],
+                    ['cfgana','配置分析','运行参数',`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>`],
+                ].map(([tab,label,sub,icon])=>`
                     <button class="nav-card" onclick="switchTab('${tab}')">
                         <div class="nav-card-left">${icon}<span class="nav-card-label">${label}</span></div>
-                        <div class="nav-card-right">${sub}
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                                 stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                        </div>
-                    </button>
-                `).join('')}
+                        <div class="nav-card-right">${sub}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+                    </button>`).join('')}
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
-// 构建一句话核心摘要
-function buildHeroSentence(ci, ga) {
-    const total    = ga.alive_count || 0;
-    const geo      = Object.keys(ga.geography_distribution || {}).length;
-    const duration = ci.check_duration || '-';
-    const traffic  = ci.check_traffic  || '-';
-    const speed    = ci.check_min_speed;
-    const speedStr = (speed && String(speed) !== '0') ? `，速度下限 <span class="hl">${speed} KB/s</span>` : '';
-
-    const qm       = ga.quality_metrics || {};
-    const cfRatio  = qm.cf_consistent_ratio || '';
-
-    return `本次检测耗时 <span class="hl">${duration}</span>，消耗流量 <span class="hl">${traffic}</span>，` +
-           `共检测 <span class="hl">${ci.check_count||'-'}</span> 个节点${speedStr}，` +
-           `获得 <span class="hl-ok">${total}</span> 个可用节点，` +
-           `覆盖 <span class="hl">${geo}</span> 个国家/地区` +
-           (cfRatio ? `，CF 中转占比 <span class="hl">${cfRatio}</span>` : '') + '。';
+function buildHeroSentence(ci,ga){
+    const total=ga.alive_count||0;
+    const geo=Object.keys(ga.geography_distribution||{}).length;
+    const qm=ga.quality_metrics||{};
+    const cfRatio=qm.cf_consistent_ratio||'';
+    const speed=ci.check_min_speed;
+    const speedStr=(speed&&String(speed)!=='0')?`，速度下限 <span class="hl">${speed} KB/s</span>`:'';
+    return `本次检测耗时 <span class="hl">${ci.check_duration||'-'}</span>，消耗流量 <span class="hl">${ci.check_traffic||'-'}</span>，`+
+           `共检测 <span class="hl">${ci.check_count||'-'}</span> 个节点${speedStr}，`+
+           `获得 <span class="hl-ok">${total}</span> 个可用节点，`+
+           `覆盖 <span class="hl">${geo}</span> 个国家/地区`+
+           (cfRatio?`，CF 中转占比 <span class="hl">${cfRatio}</span>`:'')+'。';
 }
 
-// 从摘要文字中解析媒体解锁信息
-function parseUnlockFromSummary(text) {
-    const unlockColors = {
-        'Netflix': '#e50914', 'YouTube': '#ff0000', 'Disney+': '#113ccf',
-        'TikTok': '#010101', 'GPT+': '#10a37f', 'GPT': '#10a37f', 'Gemini': '#4285f4'
-    };
-    const result = [];
-    // 匹配 "Name:数字" 格式
-    const mediaMatch = text.match(/流媒体解锁:\s*\[([^\]]*)\]/);
-    const aiMatch    = text.match(/AI 解锁\[([^\]]*)\]/);
-    for (const m of [mediaMatch, aiMatch]) {
-        if (!m) continue;
-        const items = m[1].split(',').map(s => s.trim()).filter(Boolean);
-        for (const item of items) {
-            const [name, count] = item.split(':').map(s => s.trim());
-            if (name && count) {
-                result.push({ name, count, color: unlockColors[name] || 'var(--muted)' });
-            }
+function parseUnlockFromSummary(text){
+    const colors={'Netflix':'#e50914','YouTube':'#ff0000','Disney+':'#113ccf','TikTok':'#010101','GPT+':'#10a37f','GPT':'#10a37f','Gemini':'#4285f4'};
+    const result=[];
+    for(const m of [text.match(/流媒体解锁:\s*\[([^\]]*)\]/),text.match(/AI 解锁\[([^\]]*)\]/)]){
+        if(!m)continue;
+        for(const item of m[1].split(',').map(s=>s.trim()).filter(Boolean)){
+            const[name,count]=item.split(':').map(s=>s.trim());
+            if(name&&count)result.push({name,count,color:colors[name]||'var(--muted)'});
         }
     }
     return result;
 }
 
-function cfGroup(title, obj, color) {
-    const entries = Object.entries(obj).sort((a, b) => b[1] - a[1]);
-    if (!entries.length) return '';
-    return `
-        <div class="cf-group">
-            <span class="cf-group-title" style="color:${color}">${title}</span>
-            <span class="cf-tags">
-                ${entries.map(([k, v]) => `<span class="cf-tag">${k}<em>${v}</em></span>`).join('')}
-            </span>
-        </div>
-    `;
+function cfGroup(title,obj,color){
+    const entries=Object.entries(obj).sort((a,b)=>b[1]-a[1]);
+    if(!entries.length)return'';
+    return`<div class="cf-group"><span class="cf-group-title" style="color:${color}">${title}</span><span class="cf-tags">${entries.map(([k,v])=>`<span class="cf-tag">${k}<em>${v}</em></span>`).join('')}</span></div>`;
 }
 
-// ── Tab 2：地理分布 ──────────────────────────────────────────
-function renderGeo(ga) {
-    const geo     = ga.geography_distribution || {};
-    const entries = Object.entries(geo).sort((a, b) => b[1] - a[1]);
-    const maxVal  = entries[0]?.[1] || 1;
-
-    if (!entries.length) {
-        document.getElementById('geoBars').innerHTML = '<div style="padding:16px;color:var(--muted);font-size:13px">暂无地区数据</div>';
-        return;
-    }
-    const half  = Math.ceil(entries.length / 2);
-    const left  = entries.slice(0, half);
-    const right = entries.slice(half);
-    const barRow = ([k, v]) => `
-        <div class="geo-row">
-            <span class="geo-key">${k}</span>
-            <div class="geo-bar-wrap">
-                <div class="geo-bar" style="width:${Math.round(v / maxVal * 100)}%"></div>
-            </div>
-            <span class="geo-val">${v}</span>
-        </div>
-    `;
-    document.getElementById('geoBars').innerHTML = `
-        <div class="geo-col">${left.map(barRow).join('')}</div>
-        <div class="geo-col">${right.length ? right.map(barRow).join('') : ''}</div>
-    `;
+// ── Tab 2: geo ───────────────────────────────────────────────
+function renderGeo(ga){
+    const geo=ga.geography_distribution||{};
+    const entries=Object.entries(geo).sort((a,b)=>b[1]-a[1]);
+    const maxVal=entries[0]?.[1]||1;
+    if(!entries.length){document.getElementById('geoBars').innerHTML='<div style="padding:16px;color:var(--muted);font-size:13px">暂无地区数据</div>';return;}
+    const half=Math.ceil(entries.length/2);
+    const barRow=([k,v])=>`<div class="geo-row"><span class="geo-key">${k}</span><div class="geo-bar-wrap"><div class="geo-bar" style="width:${Math.round(v/maxVal*100)}%"></div></div><span class="geo-val">${v}</span></div>`;
+    document.getElementById('geoBars').innerHTML=`<div class="geo-col">${entries.slice(0,half).map(barRow).join('')}</div><div class="geo-col">${entries.slice(half).map(barRow).join('')}</div>`;
 }
 
-// ── Tab 3：协议分析（增强版）──────────────────────────────────
-const PROTO_COLORS = {
-    vless: '#0ea5a0', vmess: '#d97706', trojan: '#7c3aed',
-    ss: '#2563eb', ssr: '#1d4ed8', http: '#059669',
-    socks5: '#64748b', hysteria: '#db2777', hy2: '#be185d',
-    tuic: '#0891b2'
-};
+// ── Tab 3: proto ─────────────────────────────────────────────
+const PROTO_COLORS={vless:'#0ea5a0',vmess:'#d97706',trojan:'#7c3aed',ss:'#2563eb',ssr:'#1d4ed8',http:'#059669',socks5:'#64748b',hysteria:'#db2777',hy2:'#be185d',tuic:'#0891b2'};
+function getProtoColor(name){return PROTO_COLORS[name.toLowerCase().replace(/[^a-z0-9]/g,'')]||'#94a3b8';}
 
-function getProtoColor(name) {
-    const key = name.toLowerCase().replace(/[^a-z0-9]/g, '');
-    return PROTO_COLORS[key] || '#94a3b8';
-}
-
-function renderProto(ga) {
-    const proto   = ga.protocol_distribution || {};
-    const total   = ga.alive_count           || 1;
-    const entries = Object.entries(proto).sort((a, b) => b[1] - a[1]);
-
-    if (!entries.length) {
-        document.getElementById('protoContent').innerHTML = '<p style="color:var(--muted);font-size:13px">暂无协议数据</p>';
-        return;
-    }
-
-    // 彩色总览条
-    const summaryBar = entries.map(([k, v]) => {
-        const pct = Math.max(2, Math.round(v / total * 100));
-        return `<div class="proto-summary-seg" style="flex:${pct};background:${getProtoColor(k)}" title="${k}: ${v} (${Math.round(v/total*100)}%)"></div>`;
+function renderProto(ga){
+    const proto=ga.protocol_distribution||{};
+    const total=ga.alive_count||1;
+    const entries=Object.entries(proto).sort((a,b)=>b[1]-a[1]);
+    if(!entries.length){document.getElementById('protoContent').innerHTML='<p style="color:var(--muted);font-size:13px">暂无协议数据</p>';return;}
+    const bar=entries.map(([k,v])=>`<div class="proto-summary-seg" style="flex:${Math.max(2,Math.round(v/total*100))};background:${getProtoColor(k)}" title="${k}: ${v}"></div>`).join('');
+    const legend=entries.map(([k])=>`<div class="proto-legend-item"><span class="proto-legend-dot" style="background:${getProtoColor(k)}"></span>${k}</div>`).join('');
+    const cards=entries.map(([k,v])=>{
+        const pct=Math.round(v/total*100);const color=getProtoColor(k);
+        return`<div class="proto-card proto-${k.toLowerCase().replace(/[^a-z0-9]/g,'')}" style="--proto-color:${color}">
+            <div class="proto-card-header"><span class="proto-card-name" style="color:${color}">${k}</span><span class="proto-card-pct">${pct}%</span></div>
+            <div class="proto-card-count" style="color:${color}">${v}</div>
+            <div class="proto-card-bar-wrap"><div class="proto-card-bar" style="width:${pct}%"></div></div>
+            <div class="proto-card-pct" style="color:var(--muted)">共 ${total} 节点中占 ${v} 个</div>
+        </div>`;
     }).join('');
-
-    // 图例
-    const legend = entries.map(([k]) =>
-        `<div class="proto-legend-item">
-            <span class="proto-legend-dot" style="background:${getProtoColor(k)}"></span>
-            ${k}
-        </div>`
-    ).join('');
-
-    // 协议卡片网格
-    const cards = entries.map(([k, v]) => {
-        const pct   = Math.round(v / total * 100);
-        const color = getProtoColor(k);
-        const cls   = 'proto-' + k.toLowerCase().replace(/[^a-z0-9]/g,'');
-        return `
-            <div class="proto-card ${cls}" style="--proto-color:${color}">
-                <div class="proto-card-header">
-                    <span class="proto-card-name" style="color:${color}">${k}</span>
-                    <span class="proto-card-pct">${pct}%</span>
-                </div>
-                <div class="proto-card-count" style="color:${color}">${v}</div>
-                <div class="proto-card-bar-wrap">
-                    <div class="proto-card-bar" style="width:${pct}%"></div>
-                </div>
-                <div class="proto-card-pct" style="color:var(--muted)">共 ${total} 个节点中占 ${v} 个</div>
-            </div>
-        `;
-    }).join('');
-
-    document.getElementById('protoContent').innerHTML = `
+    document.getElementById('protoContent').innerHTML=`
         <div class="section-title">协议总览（${entries.length} 种 / ${total} 节点）</div>
-        <div class="proto-summary-bar">${summaryBar}</div>
+        <div class="proto-summary-bar">${bar}</div>
         <div class="proto-legend">${legend}</div>
-        <div class="proto-grid">${cards}</div>
-    `;
+        <div class="proto-grid">${cards}</div>`;
 }
 
-// ── Tab 4：订阅排名 + 复制功能 ──────────────────────────────
-function renderSubs(subs, subsBad) {
-    // 复制工具栏
-    document.getElementById('copyToolbar').innerHTML = subs.length ? `
+// ── Tab 4: subs ──────────────────────────────────────────────
+function renderSubs(subs,subsBad){
+    // 按钮文字用 span.btn-text 包裹，小屏 CSS 隐藏
+    document.getElementById('copyToolbar').innerHTML=subs.length?`
         <div class="copy-toolbar">
-            <span class="copy-toolbar-label">一键复制：</span>
+            <span class="copy-toolbar-label">复制：</span>
             <button class="copy-btn" id="copyUrlsBtn" onclick="copyUrls(false)" title="每行一个 URL">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                </svg>
-                复制 URL 列表
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span class="btn-text">URL 列表</span>
             </button>
             <button class="copy-btn" id="copyYamlBtn" onclick="copyUrls(true)" title="可直接替换 sub-urls 配置段">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-                </svg>
-                复制 YAML 格式
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span class="btn-text">YAML 格式</span>
             </button>
             <div class="copy-scope">
                 <label title="同时包含失效订阅">
-                    <input type="checkbox" id="copyIncludeBad"> 包含失效订阅
+                    <input type="checkbox" id="copyIncludeBad">
+                    <span class="scope-text">含失效</span>
                 </label>
             </div>
-        </div>
-    ` : '';
+        </div>`:'';
 
-    if (!subs.length) {
-        document.getElementById('rankingContent').innerHTML = '<p style="color:var(--muted);font-size:13px">暂无有效订阅</p>';
-    } else {
-        document.getElementById('rankingContent').innerHTML = `
+    if(!subs.length){document.getElementById('rankingContent').innerHTML='<p style="color:var(--muted);font-size:13px">暂无有效订阅</p>';}
+    else{
+        document.getElementById('rankingContent').innerHTML=`
             <div class="section-title">订阅排名（${subs.length} 个有效）</div>
             <div class="sub-list">
-                ${subs.map((s, i) => {
-                    const stats    = s.stats || {};
-                    const rateStr  = String(stats.rate || '0%');
-                    const rateNum  = parseFloat(rateStr);
-                    const barColor = rateNum >= 10 ? 'var(--success)' : rateNum > 0 ? 'var(--warning)' : 'var(--danger)';
-                    const locs   = Array.isArray(s.top_locations)
-                        ? s.top_locations.join('').split('|').filter(Boolean) : [];
-                    const protos = s.protocols
-                        ? Object.entries(s.protocols).sort((a, b) => b[1] - a[1]) : [];
-                    return `
-                        <div class="sub-item">
-                            <div class="sub-header">
-                                <span class="sub-rank">${i + 1}</span>
-                                <span class="sub-url" title="${esc(s.url)}">${esc(s.url)}</span>
-                                <span class="sub-rate" style="color:${barColor}">${rateStr}</span>
-                            </div>
-                            <div class="sub-bar-wrap">
-                                <div class="sub-bar" style="width:${Math.min(rateNum,100)}%;background:${barColor}"></div>
-                            </div>
-                            <div class="sub-meta">
-                                <span>${stats.success||0} / ${stats.total||0} 节点</span>
-                                ${locs.map(l => `<span class="tag-pill">${l}</span>`).join('')}
-                                ${protos.map(([k,v]) => `<span class="tag-pill">${k}:${v}</span>`).join('')}
-                            </div>
+                ${subs.map((s,i)=>{
+                    const stats=s.stats||{};
+                    const rateStr=String(stats.rate||'0%');
+                    const rateNum=parseFloat(rateStr);
+                    const barColor=rateNum>=10?'var(--success)':rateNum>0?'var(--warning)':'var(--danger)';
+                    const locs=Array.isArray(s.top_locations)?s.top_locations.join('').split('|').filter(Boolean):[];
+                    const protos=s.protocols?Object.entries(s.protocols).sort((a,b)=>b[1]-a[1]):[];
+                    return`<div class="sub-item">
+                        <div class="sub-header">
+                            <span class="sub-rank">${i+1}</span>
+                            <span class="sub-url" title="${esc(s.url)}">${esc(s.url)}</span>
+                            <span class="sub-rate" style="color:${barColor}">${rateStr}</span>
                         </div>
-                    `;
+                        <div class="sub-bar-wrap"><div class="sub-bar" style="width:${Math.min(rateNum,100)}%;background:${barColor}"></div></div>
+                        <div class="sub-meta">
+                            <span>${stats.success||0} / ${stats.total||0} 节点</span>
+                            ${locs.map(l=>`<span class="tag-pill">${l}</span>`).join('')}
+                            ${protos.map(([k,v])=>`<span class="tag-pill">${k}:${v}</span>`).join('')}
+                        </div>
+                    </div>`;
                 }).join('')}
-            </div>
-        `;
+            </div>`;
     }
 
-    if (!subsBad.length) { document.getElementById('badContent').innerHTML = ''; return; }
-    document.getElementById('badContent').innerHTML = `
+    if(!subsBad.length){document.getElementById('badContent').innerHTML='';return;}
+    document.getElementById('badContent').innerHTML=`
         <div class="section-title-toggle" onclick="toggleBad()">
             失效订阅&nbsp;<span style="font-weight:400;text-transform:none;letter-spacing:0">(${subsBad.length})</span>
             <span class="toggle-line"></span>
-            <svg class="toggle-chevron" id="badChevron" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"/>
-            </svg>
+            <svg class="toggle-chevron" id="badChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div id="badList" style="display:none">
             <div class="bad-list">
-                ${subsBad.map(s => {
-                    const stats = s.stats || {};
-                    return `
-                        <div class="bad-item">
-                            <span class="bad-url" title="${esc(s.url)}">${esc(s.url)}</span>
-                            <span class="bad-count">${stats.success||0}/${stats.total||0}</span>
-                        </div>
-                    `;
-                }).join('')}
+                ${subsBad.map(s=>{const st=s.stats||{};return`<div class="bad-item"><span class="bad-url" title="${esc(s.url)}">${esc(s.url)}</span><span class="bad-count">${st.success||0}/${st.total||0}</span></div>`;}).join('')}
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
-// ── 复制功能 ──────────────────────────────────────────────────
-function copyUrls(asYaml) {
-    if (!_reportData) return;
-    const subs    = _reportData.subs_ranking     || [];
-    const subsBad = _reportData.subs_ranking_bad || [];
-    const includeBad = document.getElementById('copyIncludeBad')?.checked;
+// ════════════════════════════════════════════════════════════
+// 复制功能 —— 修复 iOS / HTTP 环境下剪贴板失效
+// ════════════════════════════════════════════════════════════
+/**
+ * writeClipboard(text) → Promise<boolean>
+ *
+ * 优先使用 navigator.clipboard（需 HTTPS / localhost）
+ * 降级：构造不可见 textarea，走 selection + execCommand
+ * iOS 专项处理：使用 createRange + setSelectionRange
+ * （iOS Safari 不支持 position:fixed 元素的 select()）
+ */
+async function writeClipboard(text){
+    if(navigator.clipboard&&window.isSecureContext){
+        try{await navigator.clipboard.writeText(text);return true;}
+        catch(e){/* fall through */}
+    }
+    // 降级方案
+    const ta=document.createElement('textarea');
+    ta.value=text;
+    ta.setAttribute('readonly','');
+    // 定位到当前滚动位置内，不影响布局，iOS 不能用 fixed
+    ta.style.cssText=[
+        'position:absolute',
+        'top:'+(window.scrollY||document.documentElement.scrollTop)+'px',
+        'left:0','width:1px','height:1px',
+        'padding:0','border:none','outline:none',
+        'box-shadow:none','background:transparent','opacity:0',
+    ].join(';');
+    document.body.appendChild(ta);
 
-    const btnId = asYaml ? 'copyYamlBtn' : 'copyUrlsBtn';
-    let text = '';
-
-    if (asYaml) {
-        // YAML 格式，可直接替换配置段
-        const fmtSub = (s) => {
-            const stats  = s.stats || {};
-            const protos = s.protocols
-                ? Object.entries(s.protocols).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${k}: ${v}`).join('; ') : '';
-            const rateStr = String(stats.rate || '0%');
-            return `  - ${s.url} # ${rateStr} (${stats.success||0}/${stats.total||0})${protos ? ' ['+protos+']' : ''}`;
-        };
-
-        text += `# 达标订阅列表\nsub-urls:\n`;
-        text += subs.map(fmtSub).join('\n');
-
-        if (includeBad && subsBad.length) {
-            text += `\n\n# 成功率为 0 的订阅\nsub-urls-bad:\n`;
-            text += subsBad.map(s => {
-                const st = s.stats || {};
-                return `  - ${s.url} # 0.0% (${st.success||0}/${st.total||0})`;
-            }).join('\n');
-        }
-    } else {
-        // 纯 URL，每行一个
-        text = subs.map(s => s.url).join('\n');
-        if (includeBad && subsBad.length) {
-            text += '\n\n# 失效订阅\n' + subsBad.map(s => s.url).join('\n');
-        }
+    const isIOS=/ipad|iphone/i.test(navigator.userAgent);
+    if(isIOS){
+        // iOS 需要 createRange + setSelectionRange 才能选中
+        const range=document.createRange();
+        range.selectNodeContents(ta);
+        const sel=window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0,999999);
+    }else{
+        ta.select();
     }
 
-    navigator.clipboard.writeText(text).then(() => {
-        const btn = document.getElementById(btnId);
-        if (!btn) return;
-        btn.classList.add('copied');
-        const prev = btn.innerHTML;
-        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 已复制`;
-        setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = prev; }, 2000);
-    }).catch(() => {
-        // 降级：textarea 手动复制
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        ta.remove();
+    let ok=false;
+    try{ok=document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+    return ok;
+}
+
+function copyUrls(asYaml){
+    if(!_reportData)return;
+    const subs=_reportData.subs_ranking||[];
+    const subsBad=_reportData.subs_ranking_bad||[];
+    const includeBad=document.getElementById('copyIncludeBad')?.checked;
+    const btnId=asYaml?'copyYamlBtn':'copyUrlsBtn';
+    let text='';
+
+    if(asYaml){
+        const fmt=s=>{
+            const st=s.stats||{};
+            const protos=s.protocols?Object.entries(s.protocols).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${k}: ${v}`).join('; '):'';
+            return`  - ${s.url} # ${String(st.rate||'0%')} (${st.success||0}/${st.total||0})${protos?' ['+protos+']':''}`;
+        };
+        text=`# 达标订阅列表\nsub-urls:\n`+subs.map(fmt).join('\n');
+        if(includeBad&&subsBad.length){
+            text+=`\n\n# 成功率为 0 的订阅\nsub-urls-bad:\n`+subsBad.map(s=>{const st=s.stats||{};return`  - ${s.url} # 0.0% (${st.success||0}/${st.total||0})`;}).join('\n');
+        }
+    }else{
+        text=subs.map(s=>s.url).join('\n');
+        if(includeBad&&subsBad.length)text+='\n\n# 失效订阅\n'+subsBad.map(s=>s.url).join('\n');
+    }
+
+    const btn=document.getElementById(btnId);
+    writeClipboard(text).then(ok=>{
+        if(!btn)return;
+        const prev=btn.innerHTML;
+        if(ok){
+            btn.classList.add('copied');
+            btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="btn-text">已复制</span>`;
+            setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=prev;},2000);
+        }else{
+            btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span class="btn-text">请手动复制</span>`;
+            setTimeout(()=>{btn.innerHTML=prev;},2500);
+        }
     });
 }
 
-function toggleBad() {
-    const list    = document.getElementById('badList');
-    const chevron = document.getElementById('badChevron');
-    const open    = list.style.display === 'none';
-    list.style.display = open ? '' : 'none';
-    chevron.classList.toggle('open', open);
+// ── Tab 5: config analysis ───────────────────────────────────
+function renderConfig(ci,ga,sr,sb){
+    const total=ga.alive_count||0;
+    const qm=ga.quality_metrics||{};
+    const checked=parseInt(ci.check_count)||0;
+    const speed=parseInt(ci.check_min_speed)||0;
+    const badCnt=sb.length,goodCnt=sr.length;
+    const passRate=checked>0?Math.round(total/checked*100):0;
+    const geoCount=Object.keys(ga.geography_distribution||{}).length;
+    const protoCount=Object.keys(ga.protocol_distribution||{}).length;
+
+    let vps={};
+    for(const[k,v]of Object.entries(qm)){if(k.startsWith('vps_details')&&typeof v==='object'){vps=v;break;}}
+    const vpsTotal=Object.values(vps).reduce((a,b)=>a+b,0);
+
+    const kvs=[
+        {k:'检测节点数',v:ci.check_count||'-'},
+        {k:'检测耗时',v:ci.check_duration||'-'},
+        {k:'流量消耗',v:ci.check_traffic||'-'},
+        {k:'速度下限',v:speed>0?speed+' KB/s':'未设置',cls:speed>0?'ok':'warn'},
+        {k:'可用节点',v:total,cls:total>0?'ok':'bad'},
+        {k:'通过率',v:passRate+'%',cls:passRate>=20?'ok':passRate>5?'warn':'bad'},
+        {k:'有效订阅',v:goodCnt},
+        {k:'失效订阅',v:badCnt,cls:badCnt>0?(badCnt>goodCnt?'bad':'warn'):'ok'},
+        {k:'检测时间',v:ci.check_time||'-'},
+    ];
+
+    const suggests=[];
+    if(speed===0)suggests.push({l:'warn',t:'未设置速度下限，所有节点（含极慢节点）都被收录。建议设置 <code>check-min-speed: 500</code> 过滤低速节点。'});
+    else if(speed<200)suggests.push({l:'info',t:`速度下限 ${speed} KB/s 较低，慢速节点仍会被收录，可视场景适当提高。`});
+    else suggests.push({l:'good',t:`速度下限 ${speed} KB/s 设置合理，可有效过滤低质量节点。`});
+
+    if(passRate===0&&checked>0)suggests.push({l:'warn',t:'通过率为 0%，未获得任何可用节点。请检查订阅源可用性或网络连接。'});
+    else if(passRate<5&&checked>0)suggests.push({l:'warn',t:`通过率仅 ${passRate}%，远低于正常水平（15–40%）。建议检查网络或订阅源质量。`});
+    else if(passRate>=40)suggests.push({l:'good',t:`通过率 ${passRate}%，节点质量优秀。`});
+
+    const totalSubs=goodCnt+badCnt;
+    if(badCnt>0&&totalSubs>0){
+        const r=Math.round(badCnt/totalSubs*100);
+        if(r>50)suggests.push({l:'warn',t:`失效订阅占比 ${r}%（${badCnt}/${totalSubs}），超半数失效，建议清理或替换。`});
+        else suggests.push({l:'info',t:`存在 ${badCnt} 个失效订阅（占比 ${r}%），可前往"订阅排名"标签查看。`});
+    }else if(badCnt===0&&goodCnt>0)suggests.push({l:'good',t:'所有订阅源均有效，订阅源状况良好。'});
+
+    const cfNum=parseFloat(qm.cf_consistent_ratio)||0;
+    if(cfNum>80)suggests.push({l:'info',t:`CF 中转节点占比 ${qm.cf_consistent_ratio||cfNum+'%'} 偏高，CF 节点稳定性不及独立 VPS，建议补充直连节点。`});
+    if(geoCount>=10)suggests.push({l:'good',t:`节点覆盖 ${geoCount} 个国家/地区，地理分布良好。`});
+    else if(geoCount>0&&geoCount<5)suggests.push({l:'info',t:`节点仅覆盖 ${geoCount} 个地区，分布较集中，如有多地区需求建议增加订阅源。`});
+    if(protoCount===1)suggests.push({l:'info',t:'所有节点使用同一协议，多协议可提升在不同网络环境下的兼容性。'});
+
+    const iconOk=()=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+    const iconWarn=()=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+    const iconInfo=()=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+    const getIcon=l=>l==='good'?iconOk():l==='warn'?iconWarn():iconInfo();
+    const suggestMap={'good':'good','warn':'warn','info':'info'};
+
+    document.getElementById('cfganaContent').innerHTML=`
+        <div class="section-title">本次检测参数</div>
+        <div class="cfg-analysis-grid">
+            <div class="cfg-card">
+                <div class="cfg-card-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    运行参数
+                </div>
+                ${kvs.map(kv=>`<div class="cfg-kv"><span class="cfg-k">${kv.k}</span><span class="cfg-v ${kv.cls||''}">${kv.v}</span></div>`).join('')}
+            </div>
+            <div class="cfg-card">
+                <div class="cfg-card-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    节点分布概要
+                </div>
+                <div class="cfg-kv"><span class="cfg-k">覆盖地区</span><span class="cfg-v">${geoCount} 个</span></div>
+                <div class="cfg-kv"><span class="cfg-k">协议种类</span><span class="cfg-v">${protoCount} 种</span></div>
+                <div class="cfg-kv"><span class="cfg-k">CF 中转占比</span><span class="cfg-v">${qm.cf_consistent_ratio||'-'}</span></div>
+                <div class="cfg-kv"><span class="cfg-k">独立 VPS 占比</span><span class="cfg-v">${total>0?Math.round(vpsTotal/total*100)+'%':'-'}</span></div>
+                <div class="cfg-kv"><span class="cfg-k">最优订阅节点数</span><span class="cfg-v ok">${sr[0]?(sr[0].stats?.success||'-')+' 个':'-'}</span></div>
+                <div class="cfg-kv"><span class="cfg-k">最优订阅通过率</span><span class="cfg-v ok">${sr[0]?String(sr[0].stats?.rate||'-'):'-'}</span></div>
+            </div>
+        </div>
+        <div class="section-title" style="margin-top:8px">优化建议</div>
+        <div class="suggest-list">
+            ${suggests.length
+                ?suggests.map(s=>`<div class="suggest-item ${suggestMap[s.l]}">${getIcon(s.l)}<span>${s.t}</span></div>`).join('')
+                :'<p style="color:var(--muted);font-size:13px">暂无建议，配置状态良好。</p>'}
+        </div>`;
 }
 
-function esc(str) {
-    return String(str)
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function toggleBad(){
+    const list=document.getElementById('badList'),chevron=document.getElementById('badChevron');
+    const open=list.style.display==='none';
+    list.style.display=open?'':'none';
+    chevron.classList.toggle('open',open);
 }
+
+function esc(str){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 initPage();
 </script>
