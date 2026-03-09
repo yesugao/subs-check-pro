@@ -343,6 +343,46 @@ const SCHEMA = [
         ],
       },
       {
+        title: '自动更新',
+        fields: [
+          { key: 'update', label: '自动更新', hint: '关闭时仅提醒新版本，建议保持开启', type: 'toggle' },
+          { key: 'update-on-startup', label: '启动时检查更新', type: 'toggle' },
+          { key: 'prerelease', label: '使用预发布版本', hint: '包含 beta / rc 版本', type: 'toggle' },
+          {
+            key: 'cron-check-update', label: '检查更新 Cron', type: 'text',
+            placeholder: '0 9,21 * * *',
+          },
+          {
+            key: 'update-timeout', label: '下载超时 (分钟)', type: 'number',
+            min: 1,
+            hint: '更新包下载超时，建议 2–10',
+            placeholder: '5',
+          },
+        ],
+      },
+      {
+        title: '代理设置',
+        fields: [
+          {
+            key: 'system-proxy', label: '系统代理', type: 'text',
+            hint: '用于拉取订阅和推送通知',
+            placeholder: 'http://127.0.0.1:10808',
+          },
+          {
+            key: 'github-proxy', label: 'GitHub 代理', type: 'text',
+            hint: '加速 GitHub Release 下载；国内环境强烈建议配置',
+            placeholder: 'https://ghfast.top/',
+            links: [
+              { label: '自建 CF 代理', href: 'https://github.com/sinspired/CF-Proxy', icon: 'github' },
+            ],
+          },
+          {
+            key: 'ghproxy-group', label: 'GitHub 代理列表', type: 'url-list',
+            hint: '自动筛选可用代理',
+          },
+        ],
+      },
+      {
         title: 'Sub-Store',
         fields: [
           {
@@ -372,46 +412,6 @@ const SCHEMA = [
           {
             key: 'sub-store-push-service', label: 'Push 推送服务', type: 'text',
             placeholder: 'https://push.example.com',
-          },
-        ],
-      },
-      {
-        title: '代理设置',
-        fields: [
-          {
-            key: 'system-proxy', label: '系统代理', type: 'text',
-            hint: '用于拉取订阅和推送通知',
-            placeholder: 'http://127.0.0.1:10808',
-          },
-          {
-            key: 'github-proxy', label: 'GitHub 代理', type: 'text',
-            hint: '加速 GitHub Release 下载；国内环境强烈建议配置',
-            placeholder: 'https://ghfast.top/',
-            links: [
-              { label: '自建 CF 代理', href: 'https://github.com/sinspired/CF-Proxy', icon: 'github' },
-            ],
-          },
-          {
-            key: 'ghproxy-group', label: 'GitHub 代理列表', type: 'url-list',
-            hint: '自动筛选可用代理',
-          },
-        ],
-      },
-      {
-        title: '自动更新',
-        fields: [
-          { key: 'update', label: '自动更新', hint: '关闭时仅提醒新版本，建议保持开启', type: 'toggle' },
-          { key: 'update-on-startup', label: '启动时检查更新', type: 'toggle' },
-          { key: 'prerelease', label: '使用预发布版本', hint: '包含 beta / rc 版本', type: 'toggle' },
-          {
-            key: 'cron-check-update', label: '检查更新 Cron', type: 'text',
-            placeholder: '0 9,21 * * *',
-          },
-          {
-            key: 'update-timeout', label: '下载超时 (分钟)', type: 'number',
-            min: 1,
-            hint: '更新包下载超时，建议 2–10',
-            placeholder: '5',
           },
         ],
       },
@@ -525,7 +525,7 @@ function el(tag, attrs = {}) {
 const _ICON = {
   warn: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
   info: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
-  ok:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+  ok: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
 };
 
 /**
@@ -787,12 +787,12 @@ function mkField(fieldDef, value) {
 
   let ctrl;
   switch (fieldDef.type) {
-    case 'number':   ctrl = mkNumber(fieldDef, value); break;
-    case 'toggle':   ctrl = mkToggle(fieldDef.key, value); break;
-    case 'select':   ctrl = mkSelect(fieldDef, value); break;
-    case 'chips':    ctrl = mkChips(fieldDef, value); break;
+    case 'number': ctrl = mkNumber(fieldDef, value); break;
+    case 'toggle': ctrl = mkToggle(fieldDef.key, value); break;
+    case 'select': ctrl = mkSelect(fieldDef, value); break;
+    case 'chips': ctrl = mkChips(fieldDef, value); break;
     case 'url-list': ctrl = mkUrlList(fieldDef, value); break;
-    default:         ctrl = mkInput(fieldDef, value); break;
+    default: ctrl = mkInput(fieldDef, value); break;
   }
 
   row.append(lbl, ctrl);
