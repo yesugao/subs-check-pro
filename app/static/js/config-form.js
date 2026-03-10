@@ -794,11 +794,15 @@ export function initConfigForm() {
   }
 
   /* ── splitBtn / 模式切换按钮可见性 ──────────────────────── */
-  function updateSplitBtnVisibility() {
-    if (!splitBtn) return;
-    const isYaml = editorContainer?.classList.contains('editor-mode-yaml') ?? false;
-    splitBtn.style.display = (isYaml || !_canSplit()) ? 'none' : '';
-  }
+function updateSplitBtnVisibility() {
+  if (!splitBtn) return;
+  const isYaml = editorContainer?.classList.contains('editor-mode-yaml') ?? false;
+  const show = !isYaml && _canSplit();
+  splitBtn.style.display = show ? '' : 'none';
+  // 分隔线与双栏按钮同步显隐
+  const divider = document.getElementById('splitDivider');
+  if (divider) divider.style.display = show ? '' : 'none';
+}
 
   /* ── 模式切换：单按钮逻辑 ─────────────────────────────────
    * 1. 直接切换 class（保证始终生效）

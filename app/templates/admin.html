@@ -432,15 +432,19 @@
                 </button>
               </div>
 
-              <button id="splitViewBtn" class="cfg-mode-btn" title="双栏对比（宽屏可用）" style="display:none;"
-                aria-pressed="false">
-                <svg viewBox="0 0 1024 1024" fill="currentColor" width="13" height="13" style="flex-shrink:0">
+              <!-- 分隔线：仅宽屏时随双栏按钮一起显示 -->
+              <span class="seg-divider" id="splitDivider" style="display:none;"></span>
+
+              <!-- 双栏按钮 -->
+              <button id="splitViewBtn" class="cfg-mode-btn" title="双栏对比" style="display:none;" aria-pressed="false">
+                <svg viewBox="0 0 1024 1024" fill="currentColor" width="12" height="12" style="flex-shrink:0">
                   <path d="M509 1020c-22.09 0-40-17.91-40-40V42c0-22.09 17.91-40 40-40s40 17.91 40 40v938c0 22.09-17.91 40-40 40z
-               M970 915H665c-22.09 0-40-17.91-40-40s17.91-40 40-40h277V204H665c-22.09 0-40-17.91-40-40s17.91-40 40-40h305
-               c28.67 0 52 22.7 52 50.6v689.8c0 27.9-23.33 50.6-52 50.6z
-               M397 875c0 22.09-17.91 40-40 40H52c-28.67 0-52-22.7-52-50.6V174.6C0 146.7 23.33 124 52 124h305
-               c22.09 0 40 17.91 40 40s-17.91 40-40 40H80v631h277c22.09 0 40 17.91 40 40z" />
+        M970 915H665c-22.09 0-40-17.91-40-40s17.91-40 40-40h277V204H665c-22.09 0-40-17.91-40-40s17.91-40 40-40h305
+        c28.67 0 52 22.7 52 50.6v689.8c0 27.9-23.33 50.6-52 50.6z
+        M397 875c0 22.09-17.91 40-40 40H52c-28.67 0-52-22.7-52-50.6V174.6C0 146.7 23.33 124 52 124h305
+        c22.09 0 40 17.91 40 40s-17.91 40-40 40H80v631h277c22.09 0 40 17.91 40 40z" />
                 </svg>
+                <!-- <span>双栏</span> -->
               </button>
             </div>
 
