@@ -9,18 +9,21 @@
   gap: 6px;
   flex-shrink: 0;
   padding-right: 10px;
-  border-right: 1px solid var(--border);
+  border-right: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
   margin-right: 2px;
+  height: 14px;
 }
 .title-with-icon .title-text {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--fg);
+  font-size: 14px;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--fg) 80%, transparent);
   white-space: nowrap;
+  line-height: 1.0;
 }
 .title-with-icon .title-icon {
   color: var(--muted);
   flex-shrink: 0;
+  margin-bottom: 4px;
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -30,10 +33,10 @@
   display: flex;
   align-items: center;
   gap: 1px;
-  padding: 2px;
+  padding: 1px;
   background: color-mix(in srgb, var(--fg) 5%, transparent);
   border: 1px solid var(--border);
-  border-radius: 9px;
+  border-radius: 12px;
   flex-shrink: 0;
 }
 .cfg-mode-seg .seg-divider {
@@ -47,9 +50,9 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 3px 9px;
+  padding: 2px 8px;
   border: none;
-  border-radius: 7px;
+  border-radius: 12px;
   background: transparent;
   color: var(--muted);
   font-size: 11.5px;
@@ -103,9 +106,6 @@
    小屏（≤540px）— 合并块
 ════════════════════════════════════════════════════════════ */
 @media (max-width: 540px) {
-  .cfg-mode-btn span {
-    display: none;
-  }
   .cfg-mode-btn {
     padding: 3px 6px;
     gap: 0;
@@ -117,8 +117,10 @@
     padding-right: 6px;
     margin-right: 1px;
   }
-  #splitDivider {
-    display: none !important;
+  #splitDivider,
+  .cfg-mode-btn span {
+    /* display: none !important; */
+    display: block;
   }
 }
 
