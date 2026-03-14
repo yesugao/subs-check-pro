@@ -13,14 +13,14 @@ import (
 )
 
 const (
-	// totalBytes = 1024 TiB，以字节计
-	// 1 TiB = 1024^4 = 1 099 511 627 776 bytes
-	// 1024 TiB = 1 125 899 906 842 624 bytes
-	totalBytes = 1024 * 1_099_511_627_776
+	// totalBytes = 1024 GiB，以字节计
+	// 1 GiB = 1024^3 = 1 073 741 824 bytes
+	// 1024 GiB = 1 099 511 627 776 bytes
+	totalBytes int64 = 1024 * 1_073_741_824
 
 	// expireUnix = 2077-06-01 00:00:00 UTC
 	// 赛博朋克儿童节 🎉
-	expireUnix = 3_376_684_800 // time.Date(2077,6,1,0,0,0,0,time.UTC).Unix()
+	expireUnix int64 = 3_376_684_800 // time.Date(2077,6,1,0,0,0,0,time.UTC).Unix()
 
 	planName = "Subs-Check-Pro"
 	appURL   = "https://github.com/sinspired/subs-check-pro"
