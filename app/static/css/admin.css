@@ -859,6 +859,15 @@ main {
   color: var(--muted);
 }
 
+/* 默认小屏显示精简版 */
+.history-full  { display: none; }
+.history-short { display: inline; }
+
+@media (min-width: 640px) {
+  .history-full  { display: inline; }
+  .history-short { display: none; }
+}
+
 .icon-small {
   width: 14px;
   height: 14px;

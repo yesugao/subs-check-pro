@@ -1208,8 +1208,8 @@ import { initQuickPreview } from './cfg-quickpreview.js';
       const global = data.global_analysis || {}
 
       const newInfo = {
-        lastCheckTime: info.check_time,
-        duration: info.check_duration,
+        lastCheckTime: info.check_time_raw,
+        duration: info.check_duration_raw,
         total: info.check_count,
         available: global.alive_count
       }
@@ -1326,23 +1326,43 @@ import { initQuickPreview } from './cfg-quickpreview.js';
           return new Date(str.replace(' ', 'T'))
         }
 
+        // 完整时间：2026-03-14 21:30
         const prettyTime = (() => {
+          try {
+            let dt = info.lastCheckTime ? parseDate(info.lastCheckTime) : null
+            return dt && !isNaN(dt)
+              ? dt.toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+              : (info.lastCheckTime || '-')
+          } catch (e) { return info.lastCheckTime || '未知' }
+        })()
+
+        // 精简时间：03-14 21:30（去掉年份）
+        const prettyTimeShort = (() => {
           try {
             let dt = info.lastCheckTime ? parseDate(info.lastCheckTime) : null
             return dt && !isNaN(dt)
               ? dt.toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
               : (info.lastCheckTime || '-')
-          } catch (e) {
-            return info.lastCheckTime || '未知'
-          }
+          } catch (e) { return info.lastCheckTime || '-' }
         })()
 
-        const prettyDuration = (typeof info.duration === 'number')
-          ? (info.duration >= 3600
-            ? Math.floor(info.duration / 60) + '分'
-            : (info.duration >= 60
-              ? Math.floor(info.duration / 60) + '分' + (info.duration % 60) + '秒'
-              : info.duration + '秒'))
+        const raw = info.duration
+        // 完整用时
+        const prettyDuration = (typeof raw === 'number' && raw >= 0)
+          ? (raw >= 3600
+            ? Math.floor(raw / 60) + ' 分'
+            : (raw >= 60
+              ? Math.floor(raw / 60) + ' 分 ' + (raw % 60) + ' 秒'
+              : raw + ' 秒'))
+          : (info.duration || '0')
+
+        // 精简用时：分钟达到 2 位数（≥10分）时不显示秒
+        const prettyDurationShort = (typeof raw === 'number' && raw >= 0)
+          ? (raw >= 600
+            ? Math.floor(raw / 60) + ' 分'         // ≥10分：只显示分
+            : (raw >= 60
+              ? Math.floor(raw / 60) + ' 分 ' + (raw % 60) + ' 秒'  // 1-9分：显示分秒
+              : raw + ' 秒'))
           : (info.duration || '0')
 
         const prettyTotal = (typeof info.total === 'number')
@@ -1357,9 +1377,12 @@ import { initQuickPreview } from './cfg-quickpreview.js';
           historyLastTime: prettyTime,
           historyLastDuration: prettyDuration,
           historyLastTotal: prettyTotal,
-          historyLastAvailable: info.available
+          historyLastAvailable: info.available,
+          historyLastTimeShort: prettyTimeShort,
+          historyLastDurationShort: prettyDurationShort,
+          historyLastTotalShort: prettyTotal,
+          historyLastAvailableShort: info.available,
         }
-
         for (const [id, val] of Object.entries(mapping)) {
           const el = document.getElementById(id)
           if (el) {
