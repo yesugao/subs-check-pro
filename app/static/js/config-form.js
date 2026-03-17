@@ -351,7 +351,7 @@ const SCHEMA = [
           },
           {
             key: 'sub-process.regex-sort', label: '正则排序', type: 'url-list',
-            hint: '按优先级填写正则表达式，匹配的节点排在前面；留空不排序\n示例：.*\\bSG.*　　.*\\bUS.*　　.*GPT⁺.*',
+            hint: '按优先级填写正则表达式，匹配的节点排在前面；留空不排序\n示例：.*\bSG[¹²]\b.* (.*GPT⁺.*)(.*GM.*) .*GPT⁺.* .*\bYT\b(?!-CN).*',
           },
         ],
       },
@@ -1773,12 +1773,15 @@ function collectPanel(tabId) {
           break;
         }
         case 'url-list': {
-          const w = panel.querySelector(`.cfg-url-list[data-key="${key}"]`);
+          const w = panel.querySelector(`.cfg-url-list[data-key="${key}"]`)
           if (w) out[key] = Array.from(w.querySelectorAll('.cfg-url-item .cfg-url-input'))
             .flatMap(t => t.value.split('\n'))
-            .map(s => s.trim())
-            .filter(Boolean);
-          break;
+            .map(s => s.trim()
+              .replace(/\x08/g, '\\b')   // ← 防御存量脏数据
+              .replace(/\t/g, '\\t')
+            )
+            .filter(Boolean)
+          break
         }
         default: {
           /* text / password：input[data-key] 在 cfg-special-wrap 内也能查到 */

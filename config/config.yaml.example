@@ -163,7 +163,7 @@ sub-process:
     - "(.*GPT⁺.*)(.*GM.*)"
     - ".*\bGM\b.*"
     - ".*GPT⁺.*"
-    - ".*\bYT\b.*"
+    - ".*\bYT\b(?!-CN).*"
   # 注入订阅流量信息节点
   sub-info: false
 
