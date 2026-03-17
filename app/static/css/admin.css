@@ -1633,6 +1633,7 @@ main {
 #btnShare,
 #btnSubStore,
 #btnFiles,
+#btnProjectInfo,
 #btnAnalysis {
   display: none;
 }
@@ -2454,9 +2455,9 @@ main {
     z-index: 2000;
   }
 
-  #projectMenu.active {
+  /* #projectMenu.active {
     display: none;
-  }
+  } */
 
   /* 开始&结束检测按钮 */
   .toggle-btn {
@@ -2477,6 +2478,7 @@ main {
   #btnShare,
   #btnSubStore,
   #btnFiles,
+  #btnProjectInfo,
   #btnAnalysis {
     display: inline-block;
   }

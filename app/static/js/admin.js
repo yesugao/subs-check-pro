@@ -62,6 +62,7 @@ import { initQuickPreview } from './cfg-quickpreview.js';
     analysisBtn: $('#analysisBtn'),
     btnAnalysis: $('#btnAnalysis'),
     projectInfoBtn: $('#project-info'),
+    btnProjectInfo: $('#btnProjectInfo'),
     downloadLogsBtnSide: $('#downloadLogsBtnSide'),
     searchBtn: $('#searchBtn'),
     logoutBtn: $('#logoutBtn'),
@@ -2834,21 +2835,48 @@ import { initQuickPreview } from './cfg-quickpreview.js';
         pm.classList.remove('active')
     })
 
-    els.projectInfoBtn?.addEventListener('click', e => {
-      e.stopPropagation()
+    function openProjectMenu(anchorEl) {
       const pm = els.projectMenu
+      if (!pm) return
       if (pm.classList.contains('active')) {
         pm.classList.remove('active')
         return
       }
-      const rect = els.projectInfoBtn.getBoundingClientRect()
-      pm.style.top = `${rect.top}px`
-      pm.style.left =
-        window.innerWidth < 768
-          ? `${rect.left - 160}px`
-          : `${rect.right * 0.9}px`
+
       pm.classList.add('active')
+
+      const rect = anchorEl.getBoundingClientRect()
+      const menuW = pm.offsetWidth || 180
+      const vw = window.innerWidth
+      const GAP = 6
+
+      if (vw < 768) {
+        // 小屏：按钮下方，水平居中对齐按钮
+        let left = rect.left + rect.width / 2 - menuW / 2
+        if (left < GAP) left = GAP
+        if (left + menuW > vw - GAP) left = vw - menuW - GAP
+        pm.style.top = `${rect.bottom + GAP}px`
+        pm.style.left = `${left}px`
+      } else {
+        // 大屏：保持原有位置逻辑
+        pm.style.top = `${rect.top}px`
+        pm.style.left = `${rect.right * 0.9}px`
+      }
+    }
+
+    els.projectInfoBtn?.addEventListener('click', e => {
+      e.stopPropagation()
+      openProjectMenu(els.projectInfoBtn)
     })
+
+    els.btnProjectInfo?.addEventListener('click', e => {
+      e.stopPropagation()
+      openProjectMenu(els.btnProjectInfo)
+    })
+
+    window.addEventListener('resize', () => {
+      els.projectMenu?.classList.remove('active')
+    }, { passive: true })
 
     els.githubMenuBtn?.addEventListener('click', e => {
       e.preventDefault()
@@ -2912,7 +2940,6 @@ import { initQuickPreview } from './cfg-quickpreview.js';
       const btn = e.target.closest('.cfg-mode-btn[data-mode]')
       if (btn) switchEditorMode(btn.dataset.mode)
     })
-
   }
 
   async function loadAll() {
