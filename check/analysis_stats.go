@@ -247,12 +247,12 @@ func saveDetailedAnalysis(global *AnalysisStats, subs map[string]*AnalysisStats,
 
 		if st != nil {
 			sb.WriteString(fmt.Sprintf("  - url: %s\n", u))
-			sb.WriteString(fmt.Sprintf("    stats: { rate: %.1f%%, success: %d, total: %d }\n", rate*100, pStat.Success, pStat.Total))
+			sb.WriteString(fmt.Sprintf("    stats: { rate: %.4f%%, success: %d, total: %d }\n", rate*100, pStat.Success, pStat.Total))
 			sb.WriteString(fmt.Sprintf("    protocols: { %s }\n", formatMapToInline(st.Types)))
 			sb.WriteString(fmt.Sprintf("    top_locations: [%s]\n", getTopKeys(st.Countries, 3)))
 		} else {
 			sbBad.WriteString(fmt.Sprintf("  - url: %s\n", u))
-			sbBad.WriteString(fmt.Sprintf("    stats: { rate: %.1f%%, success: %d, total: %d }\n", rate*100, pStat.Success, pStat.Total))
+			sbBad.WriteString(fmt.Sprintf("    stats: { rate: %.4f%%, success: %d, total: %d }\n", rate*100, pStat.Success, pStat.Total))
 		}
 	}
 
@@ -493,7 +493,7 @@ func checkSubsSuccessRate(subs map[string]*AnalysisStats, sortedURLs []string) {
 		}
 
 		// 格式化行：- URL # 46.667% (7/15) ; vless: 8
-		line := fmt.Sprintf("  - %s # %.1f%% (%d/%d)%s\n", u, rate*100, pStat.Success, pStat.Total, protoStr)
+		line := fmt.Sprintf("  - %s # %.4f%% (%d/%d)%s\n", u, rate*100, pStat.Success, pStat.Total, protoStr)
 
 		// 分类逻辑
 		if pStat.Success == 0 {

@@ -743,8 +743,9 @@ function parseCount(raw) {
 // 格式化函数
 function fmtRate(r) {
     if (r === 0) return '0%';
-    if (r < 0.1) return '<0.1%';
-    if (r < 1) return r.toFixed(1) + '%';
+    if (r < 0.01) return '<0.01%';
+    if (r < 1) return r.toFixed(2) + '%';
+    if (r < 10) return r.toFixed(1) + '%';
     return Math.round(r) + '%';
 }
 
@@ -1223,8 +1224,10 @@ function renderSubs(subs, subsBad, cfg) {
         // ① 先渲染列表 HTML
         const listHTML = subs.map((s, i) => {
             const stats = s.stats || {};
-            const rateStr = String(stats.rate || '0%');
-            const rateNum = parseFloat(rateStr);
+            const rateNum = (stats.success > 0 && stats.total > 0)
+                ? stats.success / stats.total * 100
+                : parseFloat(String(stats.rate || '0'));
+            const rateStr = fmtRate(rateNum);
             const barColor = rateNum >= 10 ? 'var(--success)' : rateNum > 0 ? 'var(--warning)' : 'var(--danger)';
             const locs = Array.isArray(s.top_locations) ? s.top_locations.join('').split('|').filter(Boolean) : [];
             const protos = s.protocols ? Object.entries(s.protocols).sort((a, b) => b[1] - a[1]) : [];
