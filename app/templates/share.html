@@ -297,6 +297,7 @@
             font-size: 12px;
             font-weight: 700;
             color: var(--muted);
+            text-decoration: none;
         }
 
         .brand-info img {
@@ -426,10 +427,10 @@
 
         {{/* 页脚 */}}
         <div class="card-footer">
-            <div class="brand-info">
+            <a class="brand-info" href="/admin">
                 <img src="/static/icon/favicon.svg" alt="logo">
                 Subs-Check-PRO
-            </div>
+            </a>
             <div class="footer-meta">
                 {{ if .FooterText }}{{ .FooterText }}{{ else }}Secure Access{{ end }}
             </div>

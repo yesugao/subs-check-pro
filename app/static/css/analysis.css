@@ -56,6 +56,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   color: var(--muted);
+  text-decoration: none;
 }
 
 .brand-info img {
@@ -106,6 +107,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   color: var(--muted);
+  text-decoration: none;
 }
 
 .topbar-brand img {
