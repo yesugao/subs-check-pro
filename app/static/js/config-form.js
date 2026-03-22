@@ -1060,19 +1060,18 @@ function mkChips(field, values) {
   return wrap;
 }
 
-// TODO: 考虑支持拖动排序
 function mkUrlList(field, values) {
   const list = Array.isArray(values) ? values : (values ? [values] : []);
   const wrap = el('div', { class: 'cfg-url-list', 'data-key': field.key });
 
-  // 折行按钮挂到 wrap 上，由 mkField 负责放置到 label 行
+  // 折行按钮
   const wrapToggle = el('button', {
     type: 'button',
     class: 'cfg-url-wrap-toggle',
     title: '切换折行',
     textContent: '↵ 折行',
   });
-  wrap._wrapToggle = wrapToggle;  // ← 暴露给 mkField
+  wrap._wrapToggle = wrapToggle;
 
   let wrapOn = false;
   wrapToggle.addEventListener('click', () => {
@@ -1093,8 +1092,73 @@ function mkUrlList(field, values) {
   const addBtn = el('button', { class: 'cfg-url-add', type: 'button', textContent: '+ 添加' });
   wrap.appendChild(addBtn);
 
+  // ── 拖拽状态 ──────────────────────────────────────────────────────
+  let _dragSrc = null;   // 正在拖动的 row 元素
+
+  function _getDragHandle(row) {
+    return row.querySelector('.cfg-url-drag');
+  }
+
+  function _onDragStart(e, row) {
+    _dragSrc = row;
+    row.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    // 必须设置才能在 Firefox 触发 drag 事件
+    e.dataTransfer.setData('text/plain', '');
+  }
+
+  function _onDragEnd(row) {
+    row.classList.remove('dragging');
+    wrap.querySelectorAll('.cfg-url-item').forEach(r => r.classList.remove('drag-over'));
+    _dragSrc = null;
+  }
+
+  function _onDragOver(e, row) {
+    if (!_dragSrc || row === _dragSrc) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+
+    // 根据鼠标在目标行的上/下半区决定插入位置
+    const rect = row.getBoundingClientRect();
+    const mid = rect.top + rect.height / 2;
+    wrap.querySelectorAll('.cfg-url-item').forEach(r => {
+      r.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+    row.classList.add(e.clientY < mid ? 'drag-over-top' : 'drag-over-bottom');
+  }
+
+  function _onDragLeave(row) {
+    row.classList.remove('drag-over-top', 'drag-over-bottom');
+  }
+
+  function _onDrop(e, row) {
+    e.preventDefault();
+    if (!_dragSrc || row === _dragSrc) return;
+    const rect = row.getBoundingClientRect();
+    const before = e.clientY < rect.top + rect.height / 2;
+    wrap.insertBefore(_dragSrc, before ? row : row.nextSibling);
+    row.classList.remove('drag-over-top', 'drag-over-bottom');
+  }
+
+  // ── 行构建 ────────────────────────────────────────────────────────
   function addRow(val = '') {
-    const row = el('div', { class: 'cfg-url-item' });
+    const row = el('div', { class: 'cfg-url-item', draggable: 'true' });
+
+    // 拖拽把手
+    const handle = el('span', {
+      class: 'cfg-url-drag',
+      title: '拖动排序',
+      innerHTML: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+        <circle cx="9"  cy="5"  r="1" fill="currentColor" stroke="none"/>
+        <circle cx="15" cy="5"  r="1" fill="currentColor" stroke="none"/>
+        <circle cx="9"  cy="12" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="9"  cy="19" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="15" cy="19" r="1" fill="currentColor" stroke="none"/>
+      </svg>`,
+    });
+
     const inp = el('textarea', {
       class: 'cfg-input cfg-url-input',
       rows: '1',
@@ -1106,26 +1170,22 @@ function mkUrlList(field, values) {
     });
     inp.value = val;
 
-    let _singleLineH = 0;   // ← 每个输入框独立缓存单行基线
-
+    let _singleLineH = 0;
     const autoResize = () => {
       if (!inp.matches(':focus') && !wrap.classList.contains('wrap-mode')) return;
-
       inp.style.height = 'auto';
       let sh = inp.scrollHeight;
-
       if (!_singleLineH) {
         const pv = inp.value;
-        inp.value = 'x'; // 填入单字符获取真实的单行文本高度
+        inp.value = 'x';
         _singleLineH = inp.scrollHeight;
         inp.value = pv;
-        sh = inp.scrollHeight; // 还原文本后重新获取当前内容的真实高度
+        sh = inp.scrollHeight;
       }
-
       if (wrap.classList.contains('wrap-mode') || sh > _singleLineH) {
         inp.style.height = Math.min(sh, 300) + 'px';
       } else {
-        inp.style.height = ''; // 单行且未处于折行模式时，清除内联高度，回退使用 CSS 的默认 32px
+        inp.style.height = '';
       }
     };
 
@@ -1135,7 +1195,19 @@ function mkUrlList(field, values) {
 
     const del = el('button', { class: 'cfg-url-del', type: 'button', title: '删除', textContent: '×' });
     del.addEventListener('click', () => row.remove());
-    row.append(inp, del);
+
+    // 拖拽事件：仅通过把手触发，避免输入框内拖选文字时误触
+    handle.addEventListener('mousedown', () => { row.draggable = true; });
+    inp.addEventListener('mousedown', () => { row.draggable = false; });
+    inp.addEventListener('mouseup', () => { row.draggable = true; });
+
+    row.addEventListener('dragstart', e => _onDragStart(e, row));
+    row.addEventListener('dragend', () => _onDragEnd(row));
+    row.addEventListener('dragover', e => _onDragOver(e, row));
+    row.addEventListener('dragleave', () => _onDragLeave(row));
+    row.addEventListener('drop', e => _onDrop(e, row));
+
+    row.append(handle, inp, del);
     wrap.insertBefore(row, addBtn);
   }
 

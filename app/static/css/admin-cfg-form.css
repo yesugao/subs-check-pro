@@ -1182,20 +1182,16 @@
   gap: 4px;
   align-items: center;
   width: 100%;
+  border-radius: 6px;
+  transition: background 0.12s, margin 0.12s, padding 0.12s;
+  margin: 0 0;
+  padding: 0 0;
 }
 
 /* url-list 字段：禁用整行 hover */
 .cfg-field.full-width:has(.cfg-url-list):hover {
   background: transparent;
   margin: 0;
-}
-
-/* 单行 hover：向两侧延伸，与 .cfg-field:hover 的 margin: 0 -2px 一致 */
-.cfg-url-item {
-  border-radius: 6px;
-  transition: background 0.12s, margin 0.12s, padding 0.12s;
-  margin: 0 0;
-  padding: 0 0;
 }
 
 .cfg-url-item:hover {
@@ -1209,6 +1205,36 @@
   transform: translateX(-2px);
   transition: transform 0.12s;
   border-color: color-mix(in srgb, var(--border) 100%, var(--fg) 15%);
+}
+
+/* ── 拖拽把手 ── */
+.cfg-url-drag {
+  display: flex;
+  align-items: center;
+  padding: 0 4px 0 2px;
+  color: var(--text-muted, #9ca3af);
+  cursor: grab;
+  flex-shrink: 0;
+  opacity: 0.4;
+  transition: opacity 0.15s;
+  user-select: none;
+}
+.cfg-url-item:hover .cfg-url-drag { opacity: 0.75; }
+.cfg-url-drag:active { cursor: grabbing; }
+
+/* ── 拖动中的行 ── */
+.cfg-url-item.dragging {
+  opacity: 0.4;
+  background: var(--bg-hover, rgba(0,0,0,0.04));
+  border-radius: 6px;
+}
+
+/* ── 落点指示线 ── */
+.cfg-url-item.drag-over-top {
+  box-shadow: 0 -2px 0 0 var(--accent, #6c63ff);
+}
+.cfg-url-item.drag-over-bottom {
+  box-shadow: 0 2px 0 0 var(--accent, #6c63ff);
 }
 
 /* 删除按钮保持不动（右侧不跟随偏移） */
