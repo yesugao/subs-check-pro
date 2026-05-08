@@ -7,6 +7,7 @@ replace github.com/go-ini/ini => gopkg.in/ini.v1 v1.67.1
 require (
 	github.com/Masterminds/semver/v3 v3.4.0
 	github.com/biter777/countries v1.7.5
+	github.com/creativeprojects/go-selfupdate v1.5.2
 	github.com/docker/go-units v0.5.0
 	github.com/fsnotify/fsnotify v1.9.0
 	github.com/gin-gonic/gin v1.12.0
@@ -22,7 +23,6 @@ require (
 	github.com/samber/lo v1.53.0
 	github.com/shirou/gopsutil/v4 v4.26.3
 	github.com/sinspired/checkip v0.4.0
-	github.com/sinspired/go-selfupdate v0.0.0-20260302091346-9011365a8031
 	golang.org/x/net v0.52.0
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )

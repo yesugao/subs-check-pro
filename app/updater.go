@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/sinspired/go-selfupdate"
+	"github.com/creativeprojects/go-selfupdate"
 	"github.com/sinspired/subs-check-pro/config"
 	"github.com/sinspired/subs-check-pro/utils"
 )
