@@ -150,10 +150,8 @@ upx:
     enabled: true
     goos: [linux]
     goarch: [amd64, arm64]
-    compress: best
 
   - ids: [subs-check-pro]
     enabled: true
     goos: [windows]
     goarch: [amd64]
-    compress: best
