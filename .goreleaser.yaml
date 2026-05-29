@@ -13,7 +13,7 @@ release:
   # Release 顶部说明模板
   header: |
     ## 🚀 subs-check-pro {{ .Tag }} ({{ .Date }})
-    
+
     欢迎使用最新版本！本版本带来了诸多优化与修复。
 
     📢 **社区与交流反馈：**
@@ -75,24 +75,20 @@ builds:
     env:
       - CGO_ENABLED=0
       - GOEXPERIMENT=jsonv2
-    goos:
-      - linux
-      - windows
-      - darwin
-    goarch:
-      - amd64
-      - arm64
-      - arm
-      - "386"
-    goarm:
-      - "7"
-    ignore:
-      - goos: darwin
-        goarch: arm
-      - goos: windows
-        goarch: arm
-      - goos: darwin
-        goarch: "386"
+    targets:
+      # Desktop / Server
+      - linux/amd64
+      - linux/arm64
+      - linux/arm/7
+      - linux/386
+      - windows/amd64
+      - windows/arm64
+      - windows/386
+      - darwin/amd64
+      - darwin/arm64
+      # OpenWrt 路由
+      - linux/mipsle/softfloat
+      - linux/mips/softfloat
     mod_timestamp: "{{ .CommitTimestamp }}"
     flags:
       - -trimpath
@@ -127,14 +123,13 @@ dockers_v2:
 
     # 自动发布 latest 和 版本号
     tags:
-      - "latest"
       - "v{{ .Version }}"
+      - "{{ if not .IsNightly }}latest{{ end }}"
 
     # docker buildx 的平台列表
     platforms:
       - linux/amd64
       - linux/arm64
-      - linux/arm/v7
 
     # OCI 镜像规范标签
     annotations:
@@ -154,12 +149,12 @@ dockers_v2:
 
 # 压缩可执行文件
 upx:
-  - enabled: true
-    goos: [linux, windows]
-    goarch: [arm64, amd64]
+  - ids: [subs-check-pro]
+    goos: [linux]
+    goarch: [amd64, arm64]
+    compress: "best"
 
-    compress: "6"
-
-    # 关闭 lzma 和 brute，避免用时过长
-    lzma: false
-    brute: false
+  - ids: [subs-check-pro]
+    goos: [windows]
+    goarch: [amd64]
+    compress: "best"
