@@ -89,38 +89,8 @@ jobs:
       - name: Send notifications
         uses: sinspired/multi-release-notify@v1
         with:
-          summary: "由于原仓库触发审查，本版本合并精简了历史提交，删除部分敏感内容。请大家及时点🌟，fork，分享，备份，避免再次失联！ps: [跨平台现代 GUI 桌面端已发布](https://github.com/sinspired/subs-check-pro-gui)"
-          # release_notes: ${{ steps.release.outputs.notes }}
-          release_notes: |
-            ## 🚀 发布说明
-
-            ### ✨ 新功能
-            1. **新增 Copilot 解锁检测**，支持 GitHub Copilot 可用性检测
-            2. **新增 URL 列表拖拽排序**，提升订阅管理体验
-            3. **新增媒体检测超时设置项**，支持 WebUI 配置检测超时时间
-            4. **新增协议筛选与平台筛选一键重置按钮**
-            5. **新增小屏日志折叠/展开功能**，自动保存折叠状态
-
-            ### ⚡ 性能优化
-            6. **支持 HTTP/2 及连接复用**，优化通知发送效率
-            7. **重构订阅获取与解析逻辑**，提高解析成功率，支持 Markdown 正则解析
-            8. **优化内存管理**，修复历史遗留内存泄漏问题，主动内存回收可配置
-            9. **优化 ETA 算法与下载测速流量计算逻辑**
-            10. **优化 Gemini 检测**，正确识别欧盟政策地区，新增 HK/MO 支持
-
-            ### 🐛 问题修复
-            11. **修复 sub-store 端口禁用时重载配置导致重启的错误**
-            12. **修复分阶段进度模式下的 UI 显示异常**（已检测数量、进度条强制结束等）
-            13. **修复 GitHub 代理检测**，校验 SHA256，避免虚假代理干扰
-            14. **修复触屏拖拽排序兼容性问题**
-            15. **修复 mihomo 覆写规则中的正则表达式错误**
-
-            ### 🔧 基础设施与依赖更新
-            16. **升级 goreleaser 至 v7**，使用 UPX 压缩编译产物
-            17. **Docker 基础镜像从 Alpine 替换为含 glibc 的镜像**，提高兼容性
-            18. **更新 mihomo → v1.19.23、Node.js → v24.15.0、sub-store → 2.22.21**
-            19. **优化 Docker 构建 CI 流程**，改进二进制文件解压命名规则
-            20. **移除 Git LFS，清理仓库结构**，更新 README 文档
+          summary: "跨平台现代 GUI 桌面端已发布：https://github.com/sinspired/subs-check-pro-gui"
+          release_notes: ${{ steps.release.outputs.notes }}
 
           email_url: ${{ secrets.EMAIL_APPRISE_URL }}
           telegram_url: ${{ secrets.TELEGRAM_APPRISE_URL }}
