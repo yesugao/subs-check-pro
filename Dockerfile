@@ -18,8 +18,8 @@ RUN apk add --no-cache tzdata
 # 最终镜像
 FROM chainguard/glibc-dynamic:latest-dev
 
-# glibc-dynamic 镜像默认用户是 65532，确保后续操作权限正确
-USER 65532
+# 覆盖 chainguard 的默认非 root 用户
+USER root
 WORKDIR /app
 
 # 复制时区
