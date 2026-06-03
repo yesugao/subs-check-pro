@@ -101,6 +101,7 @@ type Config struct {
 	SuccessLimit         int32    `yaml:"success-limit"`
 	NodePrefix           string   `yaml:"node-prefix"`
 	NodeType             []string `yaml:"node-type"`
+	NodeLoc              []string `yaml:"node-loc"`
 	EnableWebUI          bool     `yaml:"enable-web-ui"`
 	APIKey               string   `yaml:"api-key"`
 	SharePassword        string   `yaml:"share-password"`

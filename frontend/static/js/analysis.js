@@ -1537,6 +1537,7 @@ function renderConfig(ci, ga, sr, sb, cfg) {
     const successRate = parseFloat(cfg['success-rate']) || 0;
     const successLimit = parseInt(cfg['success-limit']) || 0;
     const nodeType = cfg['node-type'];
+    const nodeLoc = cfg['node-loc'];
     const ispCheck = cfg['isp-check'] === true;
     const saveMethod = cfg['save-method'] || 'local';
     const sharePassword = cfg['share-password'] || '';
@@ -1642,6 +1643,7 @@ function renderConfig(ci, ga, sr, sb, cfg) {
 
     // 7. 节点筛选选项
     if (Array.isArray(nodeType) && nodeType.length > 0) suggests.push({ l: 'info', t: `已启用协议筛选：<code>${nodeType.join(' / ')}</code>，仅测试指定协议的节点。若需覆盖更多场景，可注释掉 <code>node-type</code>。` });
+    if (Array.isArray(nodeLoc) && nodeLoc.length > 0) suggests.push({ l: 'info', t: `已启用地理位置筛选：<code>${nodeLoc.join(' / ')}</code>，仅测试指定地区的节点。若需覆盖更多场景，可注释掉 <code>node-loc</code>。` });
     if (ispCheck) suggests.push({ l: 'info', t: '<code>isp-check</code> 已开启，检测节点 ISP 类型（原生 / 住宅 / 机房），会增加少量检测耗时。' });
     if (dropBadCf) suggests.push({ l: 'info', t: '<code>drop-bad-cf-nodes: true</code> 已开启，无法访问 Cloudflare 的节点会被丢弃，可能导致可用节点明显减少。' });
 

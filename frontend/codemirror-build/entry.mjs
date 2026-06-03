@@ -46,6 +46,7 @@ const configCompletions = [
   { label: "rename-node", type: "property", detail: "是否重命名节点", section: "节点处理", isArray: false },
   { label: "node-prefix", type: "property", detail: "节点前缀", section: "节点处理", isArray: false },
   { label: "node-type", type: "property", detail: "只测试指定协议的节点", section: "节点处理", isArray: true },
+  { label: "node-loc", type: "property", detail: "只测试指定地区的节点", section: "节点处理", isArray: true },
   { label: "isp-check", type: "property", detail: "是否开启isp检测", section: "节点质量", isArray: false },
   { label: "media-check", type: "property", detail: "是否开启解锁检测", section: "媒体解锁", isArray: false },
   { label: "platforms", type: "property", detail: "流媒体检测平台列表", section: "媒体解锁", isArray: true },
@@ -276,6 +277,13 @@ const arrayItemCompletions = {
     { "label": "sudoku", "detail": "Sudoku 协议" },
     { "label": "masque", "detail": "MASQUE 协议" },
     { "label": "trusttunnel", "detail": "TrustTunnel 协议" }
+  ],
+  "node-loc": [
+    { "label": "SG", "detail": "新加坡" },
+    { "label": "JP", "detail": "日本" },
+    { "label": "KR", "detail": "韩国" },
+    { "label": "US", "detail": "美国" },
+    { "label": "VN", "detail": "越南" },
   ],
   "recipient-url": [
     { label: "bark://api.day.app/xxxxxxxxxxxxxxx", detail: "Bark(iOS) 通知格式：bark://api.day.app/{device_key}" },
@@ -548,7 +556,7 @@ const placeholderMatcher = new MatchDecorator({
   regexp: new RegExp(
     [
       // 匹配所有 configCompletions 中的 label
-      '(?<=^[ \t]*)(print-progress|progress-mode|update|update-on-startup|cron-check-update|prerelease|update-timeout|concurrent|alive-concurrent|speed-concurrent|media-concurrent|ipv6|check-interval|cron-expression|success-limit|timeout|speed-test-url|min-speed|download-timeout|download-mb|total-speed-limit|threshold|gc-threshold|rename-node|node-prefix|node-type|isp-check|media-check|platforms|media-check-timeout|drop-bad-cf-nodes|enhanced-tag|maxmind-db-path|output-dir|keep-success-proxies|listen-port|enable-web-ui|api-key|share-password|callback-script|apprise-api-server|recipient-url|notify-title|sub-store-port|sub-store-path|mihomo-overwrite-url|singbox-latest|singbox-old|sub-store-sync-cron|sub-store-produce-cron|sub-store-push-service|save-method|webdav-url|webdav-username|webdav-password|github-gist-id|github-token|github-api-mirror|worker-url|worker-token|s3-endpoint|s3-access-id|s3-secret-key|s3-bucket|s3-use-ssl|s3-bucket-lookup|system-proxy|github-proxy|ghproxy-group|sub-urls-retry|sub-urls-timeout|sub-urls-stats|success-rate|sub-urls-remote|sub-urls|sub-process|resolve-domain|node-split|regex-filter-keep|regex-filter|regex-sort|sub-info|version|json|js)(?=\s*:\s*)',
+      '(?<=^[ \t]*)(print-progress|progress-mode|update|update-on-startup|cron-check-update|prerelease|update-timeout|concurrent|alive-concurrent|speed-concurrent|media-concurrent|ipv6|check-interval|cron-expression|success-limit|timeout|speed-test-url|min-speed|download-timeout|download-mb|total-speed-limit|threshold|gc-threshold|rename-node|node-prefix|node-type|node-loc|isp-check|media-check|platforms|media-check-timeout|drop-bad-cf-nodes|enhanced-tag|maxmind-db-path|output-dir|keep-success-proxies|listen-port|enable-web-ui|api-key|share-password|callback-script|apprise-api-server|recipient-url|notify-title|sub-store-port|sub-store-path|mihomo-overwrite-url|singbox-latest|singbox-old|sub-store-sync-cron|sub-store-produce-cron|sub-store-push-service|save-method|webdav-url|webdav-username|webdav-password|github-gist-id|github-token|github-api-mirror|worker-url|worker-token|s3-endpoint|s3-access-id|s3-secret-key|s3-bucket|s3-use-ssl|s3-bucket-lookup|system-proxy|github-proxy|ghproxy-group|sub-urls-retry|sub-urls-timeout|sub-urls-stats|success-rate|sub-urls-remote|sub-urls|sub-process|resolve-domain|node-split|regex-filter-keep|regex-filter|regex-sort|sub-info|version|json|js)(?=\s*:\s*)',
 
       // 列表项：- openai / - "openai"
       '(?<=^[ \\t]*-\\s*["\']?)(openai|iprisk|gemini|copilot|tiktok|youtube|disney|netflix|x|ss|trojan|vless|vmess|shadowsocks)(?=["\']?\\b)',

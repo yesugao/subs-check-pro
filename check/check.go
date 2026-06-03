@@ -23,6 +23,7 @@ import (
 	"github.com/metacubex/mihomo/component/resolver"
 	"github.com/metacubex/mihomo/constant"
 	"github.com/oschwald/maxminddb-golang/v2"
+	"github.com/samber/lo"
 	"github.com/sinspired/subs-check-pro/v2/assets"
 	"github.com/sinspired/subs-check-pro/v2/check/platform"
 	"github.com/sinspired/subs-check-pro/v2/config"
@@ -439,7 +440,7 @@ func (pc *ProxyChecker) run(proxies []map[string]any) ([]Result, error) {
 
 	// 启动流水线阶段
 	go pc.distributeJobs(proxies, ctx)
-	go pc.runAliveStage(ctx)
+	go pc.runAliveStage(ctx, geoDB)
 	go pc.runSpeedStage(ctx, cancel)
 	pc.runMediaStageAndCollect(geoDB, ctx, cancel)
 
@@ -570,7 +571,7 @@ func (pc *ProxyChecker) distributeJobs(proxies []map[string]any, ctx context.Con
 }
 
 // 测活
-func (pc *ProxyChecker) runAliveStage(ctx context.Context) {
+func (pc *ProxyChecker) runAliveStage(ctx context.Context, db *maxminddb.Reader) {
 	// 根据是否启用测速，延迟关闭下一个阶段的通道。
 	if speedON {
 		defer close(pc.speedChan)
@@ -618,7 +619,13 @@ func (pc *ProxyChecker) runAliveStage(ctx context.Context) {
 					}
 				}
 
-				// 记录存活
+				// 地区过滤
+				if !job.checkJobLocation(db, ctx) {
+					job.Close()
+					continue
+				}
+
+				// 通过全部过滤，记录为存活
 				if job.aliveMarked.CompareAndSwap(false, true) {
 					pc.pt.CountAlive(true)
 				}
@@ -1011,17 +1018,20 @@ func checkOnePlatform(job *ProxyJob, plat string, mediaClient *http.Client, db *
 			job.Result.TikTok = region
 		}
 	case "iprisk":
-		country, ip, countryCodeTag, _ := proxyutils.GetProxyCountry(mediaClient, db, ctx, job.CfLoc, job.CfIP)
-		if ip == "" {
-			break
+		// 如果已有 IP，就直接用，不再调用 GetProxyCountry
+		if job.Result.IP == "" {
+			country, ip, countryCodeTag, _ := proxyutils.GetProxyCountry(mediaClient, db, ctx, job.CfLoc, job.CfIP)
+			if ip == "" {
+				break
+			}
+			job.Result.IP = ip
+			job.Result.Country = country
+			job.Result.CountryCodeTag = countryCodeTag
 		}
-		job.Result.IP = ip
-		job.Result.Country = country
-		job.Result.CountryCodeTag = countryCodeTag
 		var risk string
 		err := withRetry(ctx, func() error {
 			var e error
-			risk, e = platform.CheckIPRisk(mediaClient, ip)
+			risk, e = platform.CheckIPRisk(mediaClient, job.Result.IP)
 			return e
 		})
 		if err == nil {
@@ -1395,4 +1405,42 @@ func withRetry(ctx context.Context, fn func() error) error {
 		}
 	}
 	return err
+}
+
+// checkJobLocation 获取节点归属地并进行地区过滤。
+// 通过过滤后将归属地信息写入 job.Result，返回 false 表示节点未通过过滤。
+func (job *ProxyJob) checkJobLocation(db *maxminddb.Reader, ctx context.Context) bool {
+	filterLocs := config.GlobalConfig.NodeLoc
+	if len(filterLocs) == 0 {
+		return true
+	}
+
+	locTimeout := config.GlobalConfig.MediaCheckTimeout
+	if locTimeout <= 0 {
+		locTimeout = 10
+	}
+	locClient := &http.Client{
+		Transport: job.Client.Transport,
+		Timeout:   time.Duration(locTimeout) * time.Second,
+	}
+
+	country, ip, countryCodeTag, err := proxyutils.GetProxyCountry(locClient, db, ctx, job.CfLoc, job.CfIP)
+	if err != nil || country == "" {
+		return false
+	}
+
+	if !containsLocation(filterLocs, country) {
+		return false
+	}
+
+	job.Result.IP = ip
+	job.Result.Country = country
+	job.Result.CountryCodeTag = countryCodeTag
+	return true
+}
+
+func containsLocation(filterLocs []string, country string) bool {
+	return lo.ContainsBy(filterLocs, func(loc string) bool {
+		return strings.EqualFold(loc, country)
+	})
 }

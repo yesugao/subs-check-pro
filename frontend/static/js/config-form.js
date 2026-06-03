@@ -254,6 +254,17 @@ const SCHEMA = [
           }
         ]
       },
+      {
+        title: '位置筛选',
+        fields: [
+          {
+            key: 'node-loc',
+            label: '地理位置',
+            type: 'url-list',
+            hint: '根据节点归属地进行筛选，留空=全部；支持两位代码（CN、US）',
+          }
+        ]
+      },
     ],
   },
 

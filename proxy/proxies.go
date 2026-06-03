@@ -67,7 +67,10 @@ func logSubscriptionStats(total, local, remote, history int) {
 		val := "[" + strings.Join(config.GlobalConfig.NodeType, ",") + "]"
 		slog.Info("代理协议筛选", slog.String("Type", val))
 	}
-
+	if len(config.GlobalConfig.NodeLoc) > 0 {
+		val := "[" + strings.Join(config.GlobalConfig.NodeLoc, ",") + "]"
+		slog.Info("地理位置筛选", slog.String("Location", val))
+	}
 }
 
 func logFatal(err error, urlStr string) {
