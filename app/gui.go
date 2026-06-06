@@ -1,8 +1,10 @@
 package app
 
 import (
+	"net/http"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/sinspired/subs-check-pro/v2/check"
 )
 
@@ -76,4 +78,34 @@ func (app *App) GetLastCheckResult() string {
 		return str
 	}
 	return "" // 如果为空或刚启动还没数据，返回空字符串
+}
+
+// getTheme 获取当前主题
+func (app *App) getTheme(c *gin.Context) {
+    app.themeMu.RLock()
+    t := app.currentTheme
+    app.themeMu.RUnlock()
+    if t == "" {
+        t = "auto"
+    }
+    c.JSON(http.StatusOK, gin.H{"theme": t})
+}
+
+// setTheme 保存主题
+func (app *App) setTheme(c *gin.Context) {
+    var req struct {
+        Theme string `json:"theme"`
+    }
+    if err := c.ShouldBindJSON(&req); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "invalid body"})
+        return
+    }
+    if req.Theme != "dark" && req.Theme != "light" && req.Theme != "auto" {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "invalid theme"})
+        return
+    }
+    app.themeMu.Lock()
+    app.currentTheme = req.Theme
+    app.themeMu.Unlock()
+    c.JSON(http.StatusOK, gin.H{"theme": req.Theme})
 }

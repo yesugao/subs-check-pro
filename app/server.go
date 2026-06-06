@@ -238,6 +238,16 @@ func (app *App) registerShareRoutes(router *gin.Engine, outputPath string) error
 	return nil
 }
 
+func corsWails(c *gin.Context) {
+	origin := c.GetHeader("Origin")
+	// 允许 Wails WebView (wails.localhost) 和本机直接访问
+	if strings.Contains(origin, "wails.localhost") || origin == "" {
+		c.Header("Access-Control-Allow-Origin", origin)
+	}
+	c.Header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+	c.Header("Access-Control-Allow-Headers", "Content-Type")
+}
+
 // registerWebUIRoutes 注册WebUI路由
 func (app *App) registerWebUIRoutes(router *gin.Engine) {
 	router.GET(AdminPath, func(c *gin.Context) {
@@ -247,6 +257,20 @@ func (app *App) registerWebUIRoutes(router *gin.Engine) {
 	})
 
 	router.GET(AdminPath+"/version", app.getOriginVersion)
+
+	// 主题 API：无需鉴权，仅本机可访问
+	router.OPTIONS(AdminPath+"/theme", func(c *gin.Context) {
+		corsWails(c)
+		c.Status(http.StatusNoContent)
+	})
+	router.GET(AdminPath+"/theme", func(c *gin.Context) {
+		corsWails(c)
+		app.getTheme(c)
+	})
+	router.POST(AdminPath+"/theme", func(c *gin.Context) {
+		corsWails(c)
+		app.setTheme(c)
+	})
 
 	router.GET(AnalysisPath, app.handleAnalysis)
 }

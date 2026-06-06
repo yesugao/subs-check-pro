@@ -2637,7 +2637,7 @@ import { initQuickPreview } from './cfg-quickpreview.js';
     })
 
     // 绑定编辑器搜索按钮事件
-    searchBtn?.addEventListener('click', () => {
+    els.searchBtn?.addEventListener('click', () => {
       if (window.searchView && searchPanelOpen(window.searchView.state)) {
         closeSearchPanel(window.searchView)
       } else if (window.searchView) {
