@@ -89,6 +89,8 @@ High-performance proxy subscription checker.
 
 如果你更喜欢原生的桌面应用程序，可以使用全新开发的客户端。它拥有完美的跨平台系统级适配、更低的系统资源开销以及极度现代化的精致 GUI 交互界面。
 
+![GUI](./doc/images/GUI.png)
+
 ➡️ 立即前往体验：[subs-check-pro-gui 仓库](https://github.com/sinspired/subs-check-pro-gui)
 
 ### 📊 检测结果分析报告
